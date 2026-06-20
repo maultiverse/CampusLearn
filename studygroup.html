@@ -1,41 +1,267 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Study Group</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study Group – CampusLearn</title>
 <link rel="stylesheet" href="css/global.css">
-</head>
+<style>
+.top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+.tab-row { display: flex; gap: 8px; margin-bottom: 20px; }
+.tab { padding: 9px 20px; border-radius: 20px; border: 1.5px solid #E5E7EB; background: white; font-family: 'Poppins', sans-serif; font-size: .82rem; font-weight: 500; cursor: pointer; transition: all .2s; }
+.tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+.grp-card {
+  background: white; border-radius: 18px; padding: 20px 22px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.06);
+  display: flex; align-items: center; gap: 18px; margin-bottom: 12px;
+}
+.grp-icon { width: 52px; height: 52px; border-radius: 14px; background: #EEF2FF; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+.grp-info { flex: 1; }
+.grp-info h3 { font-weight: 700; margin-bottom: 3px; font-size: .92rem; }
+.grp-info .meta { font-size: .76rem; color: var(--gray); }
+.grp-info .status { font-size: .74rem; margin-top: 6px; }
+.grp-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.join-btn { padding: 8px 18px; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: .78rem; font-weight: 600; cursor: pointer; border: none; transition: all .2s; background: #EEF2FF; color: var(--primary); }
+.join-btn.joined { background: var(--primary); color: white; }
+.disc-link { font-size: .76rem; color: var(--primary); font-weight: 600; cursor: pointer; }
+.disc-link:hover { text-decoration: underline; }
 
+/* Discussion view */
+#disc-panel { display: none; }
+.back { display: inline-flex; align-items: center; gap: 8px; color: var(--gray); font-size: .85rem; cursor: pointer; margin-bottom: 20px; font-weight: 500; }
+.back:hover { color: var(--primary); }
+.disc-head { background: white; border-radius: 18px; padding: 20px 22px; box-shadow: 0 3px 14px rgba(0,0,0,.06); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+.post {
+  background: white; border-radius: 16px; padding: 18px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05); margin-bottom: 12px;
+}
+.post-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.p-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
+.p-author { font-size: .84rem; font-weight: 600; }
+.p-time { font-size: .72rem; color: var(--gray); }
+.p-text { font-size: .86rem; line-height: 1.65; }
+.p-acts { display: flex; gap: 16px; margin-top: 10px; }
+.p-act { font-size: .75rem; color: var(--gray); cursor: pointer; }
+.p-act:hover { color: var(--primary); }
+.new-post-box { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,.05); margin-top: 16px; }
+.new-post-box h4 { font-size: .88rem; font-weight: 600; margin-bottom: 12px; }
+textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #E5E7EB; border-radius: 12px; font-family: 'Poppins', sans-serif; font-size: .86rem; resize: none; }
+textarea:focus { outline: none; border-color: var(--primary); }
+</style>
+</head>
 <body>
 
-<h1>👥 Teman Belajar</h1>
-
-<button>
-+ Buat Grup
-</button>
-
-<div class="card">
-
-<h3>Pejuang Kalkulus</h3>
-
-<p>
-120 Anggota
-</p>
-
-<p>
-Aktif Sekarang
-</p>
-
+<div class="sidebar">
+  <div class="logo"><h2>CampusLearn</h2><span>Platform Belajar Mahasiswa</span></div>
+  <nav class="menu">
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="clive.html">🔴 C-Live</a>
+    <a href="ringkasin.html">📄 Ringkasin</a>
+    <a href="remindme.html">🎬 RemindMe</a>
+    <a href="studygroup.html" class="active">👥 Study Group</a>
+    <a href="profile.html">👤 Profil</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-info">
+      <div class="avatar" id="sb-avatar">R</div>
+      <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
+    </div>
+    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+  </div>
 </div>
 
-<div class="card">
+<div class="main">
+  <!-- List panel -->
+  <div id="list-panel">
+    <div class="top-bar">
+      <div class="page-header" style="margin-bottom:0;">
+        <h1>👥 Study Group</h1>
+        <p>Komunitas belajar per mata kuliah</p>
+      </div>
+      <button onclick="createGroup()" class="btn-primary" style="border:none;cursor:pointer;font-size:.84rem;padding:12px 22px;">+ Buat Grup</button>
+    </div>
 
-<h3>Fisika Dasar A</h3>
+    <input type="text" class="search-bar" placeholder="🔍 Cari grup..." oninput="renderGroups(this.value)">
 
-<p>
-90 Anggota
-</p>
+    <div class="tab-row">
+      <button class="tab active" onclick="setTab('semua',this)">Semua Grup</button>
+      <button class="tab" onclick="setTab('saya',this)">Grup Saya</button>
+    </div>
 
+    <div id="groups-list"></div>
+  </div>
+
+  <!-- Discussion panel -->
+  <div id="disc-panel">
+    <div class="back" onclick="backToList()">← Kembali ke Daftar Grup</div>
+    <div class="disc-head" id="disc-head"></div>
+    <div id="disc-posts"></div>
+    <div class="new-post-box">
+      <h4>💬 Tulis Diskusi</h4>
+      <textarea id="post-text" rows="3" placeholder="Tulis pertanyaan atau diskusi kamu..."></textarea>
+      <div style="margin-top:12px;">
+        <button onclick="submitPost()" class="btn-primary" style="border:none;cursor:pointer;font-size:.84rem;padding:10px 22px;">Kirim</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+<script>
+const user = JSON.parse(localStorage.getItem('clUser') || 'null');
+if (!user) window.location.href = 'login.html';
+else {
+  const first = user.name.split(' ')[0];
+  document.getElementById('sb-name').textContent = first;
+  document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
+  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+}
+function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
+
+const defaultGroups = [
+  { id:1, icon:'📐', name:'Pejuang Kalkulus', matkul:'Kalkulus 1 & 2', members:120, active:true, lastPost:'5 menit lalu',
+    posts:[
+      { author:'Sari', time:'10 menit lalu', text:'Ada yang bisa bantu soal integral substitusi nomor 5? Aku bingung di bagian dx-nya 🙏' },
+      { author:'Reza', time:'8 menit lalu', text:'Di soal itu substitusi u = x² + 1, jadi du = 2x dx. Tinggal ganti ke integralnya!' },
+    ]
+  },
+  { id:2, icon:'⚡', name:'Fisika Bareng', matkul:'Fisika Dasar', members:98, active:true, lastPost:'22 menit lalu',
+    posts:[
+      { author:'Hendra', time:'1 jam lalu', text:'Guys tutor Budi bilang besok ada kuis tentang gerak harmonik. Yang sudah baca, share catatan dong!' },
+      { author:'Maya', time:'45 menit lalu', text:'Udah aku upload di drive, cek link di grup WA ya 😊' },
+    ]
+  },
+  { id:3, icon:'💻', name:'Tim Progdas', matkul:'Pemrograman Dasar', members:75, active:false, lastPost:'2 jam lalu',
+    posts:[
+      { author:'Fariz', time:'2 jam lalu', text:'Error terus: "NameError: name x is not defined" — ada yang tau kenapa?' },
+      { author:'Nisa', time:'1.5 jam lalu', text:'Itu berarti kamu belum deklarasi variabel x. Tambahin x = 0 sebelum dipakai!' },
+    ]
+  },
+  { id:4, icon:'🧪', name:'Kimia Mania', matkul:'Kimia Dasar', members:60, active:true, lastPost:'1 jam lalu',
+    posts:[{ author:'Putri', time:'1 jam lalu', text:'Stoikiometri masih bingung 😅 Ada yang mau buat sesi belajar bareng minggu ini?' }]
+  },
+  { id:5, icon:'🌿', name:'Bio Squad', matkul:'Biologi', members:55, active:true, lastPost:'30 menit lalu',
+    posts:[{ author:'Ayu', time:'30 menit lalu', text:'Yang masih bingung transkripsi vs translasi, aku mau buat thread penjelasan besok!' }]
+  },
+  { id:6, icon:'📊', name:'Excel Expert', matkul:'Excel Dasar', members:45, active:false, lastPost:'3 jam lalu',
+    posts:[{ author:'Gilang', time:'3 jam lalu', text:'Tips VLOOKUP: kalau pakai match type FALSE, kolom referensi tidak perlu diurutkan!' }]
+  },
+];
+
+let groups = JSON.parse(localStorage.getItem('sg_groups') || 'null') || defaultGroups;
+let joined = JSON.parse(localStorage.getItem('sg_joined') || '[1,2]');
+let activeTab = 'semua';
+let currentGroup = null;
+
+function setTab(t, btn) {
+  activeTab = t;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGroups();
+}
+
+function renderGroups(q = '') {
+  let list = groups;
+  if (activeTab === 'saya') list = groups.filter(g => joined.includes(g.id));
+  if (q) list = list.filter(g => g.name.toLowerCase().includes(q.toLowerCase()) || g.matkul.toLowerCase().includes(q.toLowerCase()));
+
+  if (!list.length) {
+    document.getElementById('groups-list').innerHTML = '<div style="text-align:center;color:var(--gray);padding:40px 0;">Tidak ada grup ditemukan</div>';
+    return;
+  }
+
+  document.getElementById('groups-list').innerHTML = list.map(g => {
+    const isJoined = joined.includes(g.id);
+    return `
+      <div class="grp-card">
+        <div class="grp-icon">${g.icon}</div>
+        <div class="grp-info">
+          <h3>${g.name}</h3>
+          <div class="meta">${g.matkul} • ${g.members} anggota</div>
+          <div class="status">
+            <span style="color:${g.active?'#16a34a':'var(--gray)'}">● ${g.active?'Aktif':'Offline'}</span>
+            <span style="color:var(--gray);margin-left:10px;">Diskusi: ${g.lastPost}</span>
+          </div>
+        </div>
+        <div class="grp-actions">
+          <button class="join-btn ${isJoined?'joined':''}" onclick="toggleJoin(${g.id},this)">
+            ${isJoined?'✓ Bergabung':'+ Gabung'}
+          </button>
+          <span class="disc-link" onclick="openDisc(${g.id})">💬 Buka Diskusi →</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+renderGroups();
+
+function toggleJoin(id, btn) {
+  const i = joined.indexOf(id);
+  if (i === -1) { joined.push(id); btn.textContent = '✓ Bergabung'; btn.classList.add('joined'); }
+  else { joined.splice(i,1); btn.textContent = '+ Gabung'; btn.classList.remove('joined'); }
+  localStorage.setItem('sg_joined', JSON.stringify(joined));
+}
+
+function openDisc(id) {
+  currentGroup = groups.find(g => g.id === id);
+  document.getElementById('list-panel').style.display = 'none';
+  document.getElementById('disc-panel').style.display = 'block';
+
+  document.getElementById('disc-head').innerHTML = `
+    <div style="font-size:1.8rem;">${currentGroup.icon}</div>
+    <div>
+      <div style="font-size:1.1rem;font-weight:700;">${currentGroup.name}</div>
+      <div style="font-size:.8rem;color:var(--gray);">${currentGroup.matkul} • ${currentGroup.members} anggota</div>
+    </div>
+  `;
+  renderPosts();
+}
+
+function renderPosts() {
+  const posts = JSON.parse(localStorage.getItem(`sg_posts_${currentGroup.id}`) || 'null') || currentGroup.posts;
+  document.getElementById('disc-posts').innerHTML = posts.map(p => `
+    <div class="post">
+      <div class="post-top">
+        <div class="p-avatar">${p.author[0].toUpperCase()}</div>
+        <div><div class="p-author">${p.author}</div><div class="p-time">${p.time}</div></div>
+      </div>
+      <div class="p-text">${p.text}</div>
+      <div class="p-acts">
+        <span class="p-act">👍 Like</span>
+        <span class="p-act">💬 Balas</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function submitPost() {
+  const text = document.getElementById('post-text').value.trim();
+  if (!text) return;
+  const key = `sg_posts_${currentGroup.id}`;
+  const posts = JSON.parse(localStorage.getItem(key) || 'null') || [...currentGroup.posts];
+  posts.push({ author: user.name.split(' ')[0], time: 'Baru saja', text });
+  localStorage.setItem(key, JSON.stringify(posts));
+  document.getElementById('post-text').value = '';
+  renderPosts();
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function backToList() {
+  document.getElementById('list-panel').style.display = 'block';
+  document.getElementById('disc-panel').style.display = 'none';
+}
+
+function createGroup() {
+  const name = prompt('Nama grup baru:');
+  if (!name || !name.trim()) return;
+  const matkul = prompt('Untuk mata kuliah apa?');
+  if (!matkul || !matkul.trim()) return;
+  const g = { id: Date.now(), icon:'👥', name:name.trim(), matkul:matkul.trim(), members:1, active:true, lastPost:'Baru dibuat', posts:[] };
+  groups.unshift(g);
+  joined.push(g.id);
+  localStorage.setItem('sg_groups', JSON.stringify(groups));
+  localStorage.setItem('sg_joined', JSON.stringify(joined));
+  renderGroups();
+}
+</script>
 </body>
 </html>
