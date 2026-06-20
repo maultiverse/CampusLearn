@@ -3,36 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daftar - CampusLearn</title>
+<title>Daftar – CampusLearn</title>
 <link rel="stylesheet" href="css/global.css">
+<style>
+body { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 16px; }
+.login-box {
+  background: white; width: 460px; padding: 40px;
+  border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,.09);
+}
+.login-box h1 { text-align: center; margin-bottom: 6px; font-size: 1.4rem; }
+.subtitle { text-align: center; color: var(--gray); font-size: .86rem; margin-bottom: 26px; }
+.input-group { margin-bottom: 14px; }
+.input-group label { display: block; font-size: .83rem; font-weight: 500; margin-bottom: 6px; }
+input {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid #E5E7EB; border-radius: 12px;
+  font-family: 'Poppins', sans-serif; font-size: .88rem;
+  transition: border-color .2s;
+}
+input:focus { outline: none; border-color: var(--primary); }
+.plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.plan-opt {
+  border: 2px solid #E5E7EB; border-radius: 14px;
+  padding: 14px; cursor: pointer; transition: all .2s; text-align: center;
+}
+.plan-opt.sel { border-color: var(--primary); background: #EEF2FF; }
+.plan-opt h4 { font-size: .9rem; margin-bottom: 4px; }
+.plan-opt p { font-size: .75rem; color: var(--gray); }
+.err { color: var(--red); font-size: .8rem; margin-bottom: 10px; display: none; }
+</style>
 </head>
-
 <body>
 
 <div class="login-box">
+  <h1>Buat Akun 🎓</h1>
+  <p class="subtitle">Bergabung dengan CampusLearn</p>
 
-<h1>Buat Akun</h1>
+  <div class="input-group">
+    <label>Nama Lengkap</label>
+    <input type="text" id="name" placeholder="Nama kamu">
+  </div>
+  <div class="input-group">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="email@example.com">
+  </div>
+  <div class="input-group">
+    <label>NIM</label>
+    <input type="text" id="nim" placeholder="Nomor Induk Mahasiswa">
+  </div>
+  <div class="input-group">
+    <label>Program Studi</label>
+    <input type="text" id="prodi" placeholder="Contoh: Teknik Informatika">
+  </div>
+  <div class="input-group">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Min. 6 karakter">
+  </div>
+  <div class="input-group">
+    <label>Konfirmasi Password</label>
+    <input type="password" id="password2" placeholder="Ulangi password">
+  </div>
 
-<input type="text" placeholder="Nama Lengkap">
+  <div class="input-group">
+    <label>Pilih Paket</label>
+    <div class="plan-grid">
+      <div class="plan-opt" id="opt-basic" onclick="setPlan('basic')">
+        <h4>Basic</h4><p>Rp 49.000/bln</p>
+      </div>
+      <div class="plan-opt sel" id="opt-premium" onclick="setPlan('premium')">
+        <h4>⭐ Premium</h4><p>Rp 99.000/bln</p>
+      </div>
+    </div>
+  </div>
 
-<input type="email" placeholder="Email">
+  <p class="err" id="err">-</p>
 
-<input type="text" placeholder="NIM">
+  <button onclick="doSignup()" class="btn-primary"
+    style="width:100%;border:none;cursor:pointer;font-size:.93rem;">
+    Daftar Sekarang
+  </button>
 
-<input type="password" placeholder="Password">
-
-<input type="password" placeholder="Konfirmasi Password">
-
-<a href="dashboard.html" class="btn-primary">
-Daftar Sekarang
-</a>
-
-<p>
-Sudah punya akun?
-<a href="login.html">Masuk</a>
-</p>
-
+  <p style="text-align:center;margin-top:18px;font-size:.83rem;color:var(--gray);">
+    Sudah punya akun?
+    <a href="login.html" style="color:var(--primary);font-weight:600;">Masuk</a>
+  </p>
 </div>
 
+<script>
+let chosenPlan = 'premium';
+
+function setPlan(plan) {
+  chosenPlan = plan;
+  document.getElementById('opt-basic').classList.toggle('sel', plan === 'basic');
+  document.getElementById('opt-premium').classList.toggle('sel', plan === 'premium');
+}
+
+function doSignup() {
+  const name  = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const nim   = document.getElementById('nim').value.trim();
+  const prodi = document.getElementById('prodi').value.trim();
+  const pass  = document.getElementById('password').value;
+  const pass2 = document.getElementById('password2').value;
+  const errEl = document.getElementById('err');
+
+  const showErr = msg => { errEl.textContent = msg; errEl.style.display = 'block'; };
+
+  if (!name || !email || !nim || !prodi || !pass) return showErr('Semua field wajib diisi!');
+  if (pass.length < 6) return showErr('Password minimal 6 karakter!');
+  if (pass !== pass2) return showErr('Konfirmasi password tidak cocok!');
+
+  const accounts = JSON.parse(localStorage.getItem('clAccounts') || '[]');
+  if (accounts.find(a => a.email === email)) return showErr('Email sudah terdaftar!');
+
+  const user = { name, email, nim, prodi, password: pass, plan: chosenPlan };
+  accounts.push(user);
+  localStorage.setItem('clAccounts', JSON.stringify(accounts));
+  localStorage.setItem('clUser', JSON.stringify(user));
+  window.location.href = 'dashboard.html';
+}
+</script>
 </body>
 </html>
