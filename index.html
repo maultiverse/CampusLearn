@@ -1,69 +1,218 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Login</title>
-
+<title>CampusLearn – Platform Belajar Mahasiswa</title>
 <link rel="stylesheet" href="css/global.css">
-
 <style>
+.navbar {
+  position: sticky; top: 0;
+  background: rgba(255,253,247,.92);
+  backdrop-filter: blur(10px);
+  padding: 16px 0; border-bottom: 1px solid #F3F4F6; z-index: 99;
+}
+.navbar-inner { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: var(--gray); font-size: .9rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--primary); }
+.nav-cta { display: flex; gap: 12px; align-items: center; }
 
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+.hero { padding: 100px 0 80px; text-align: center; }
+.hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+.hero h1 span { color: var(--orange); }
+.hero p { font-size: 1.1rem; color: var(--gray); max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+.hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 48px; justify-content: center; margin-top: 60px; flex-wrap: wrap; }
+.stat-item .num { font-size: 2rem; font-weight: 800; color: var(--primary); }
+.stat-item .lbl { font-size: .82rem; color: var(--gray); margin-top: 2px; }
+
+.section { padding: 80px 0; }
+.section-title { text-align: center; margin-bottom: 48px; }
+.section-title h2 { font-size: 2rem; font-weight: 700; }
+.section-title p { color: var(--gray); margin-top: 8px; }
+
+.feat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 880px; margin: auto; }
+.feat-card {
+  background: white; border-radius: 24px; padding: 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06); transition: transform .2s;
+}
+.feat-card:hover { transform: translateY(-4px); }
+.feat-icon { font-size: 2.4rem; margin-bottom: 14px; }
+.feat-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.feat-card p { color: var(--gray); font-size: .88rem; line-height: 1.65; }
+.feat-card .feat-bottom { margin-top: 14px; }
+
+.matkul-wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.matkul-pill {
+  background: white; border: 1.5px solid #E5E7EB;
+  border-radius: 40px; padding: 10px 20px;
+  font-size: .85rem; font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
 
-.login-box{
-background:white;
-width:420px;
-padding:40px;
-border-radius:25px;
-box-shadow:0 10px 40px rgba(0,0,0,.08);
+.pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 740px; margin: auto; }
+.pricing-card {
+  background: white; border-radius: 24px; padding: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  border: 2px solid transparent; position: relative;
 }
-
-h1{
-text-align:center;
-margin-bottom:25px;
+.pricing-card.popular { border-color: var(--orange); }
+.pop-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: var(--orange); color: white;
+  font-size: .72rem; font-weight: 700; padding: 4px 16px; border-radius: 20px;
 }
-
-input{
-width:100%;
-padding:14px;
-border:1px solid #ddd;
-border-radius:12px;
-margin-bottom:15px;
+.plan-name { font-size: .82rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+.plan-price { font-size: 2.2rem; font-weight: 800; margin: 8px 0 4px; }
+.plan-price span { font-size: .95rem; font-weight: 400; color: var(--gray); }
+.plan-desc { color: var(--gray); font-size: .83rem; margin-bottom: 22px; }
+.plan-feats { list-style: none; margin-bottom: 26px; }
+.plan-feats li {
+  padding: 8px 0; font-size: .86rem;
+  border-bottom: 1px solid #F3F4F6;
+  display: flex; gap: 8px; align-items: flex-start;
 }
+.plan-feats li:last-child { border-bottom: none; }
+.plan-feats li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
 
-button{
-width:100%;
-border:none;
-cursor:pointer;
-}
-
+footer { background: var(--dark); color: white; padding: 36px 0; text-align: center; }
+footer p { opacity: .45; font-size: .82rem; }
 </style>
-
 </head>
-
 <body>
 
-<div class="login-box">
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <div class="nav-logo">CampusLearn</div>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#matkul">Mata Kuliah</a>
+      <a href="#harga">Harga</a>
+    </div>
+    <div class="nav-cta">
+      <a href="login.html" class="btn-outline" style="padding:10px 22px;font-size:.86rem;">Masuk</a>
+      <a href="signup.html" class="btn-primary" style="padding:10px 22px;font-size:.86rem;">Daftar Gratis</a>
+    </div>
+  </div>
+</nav>
 
-<h1>CampusLearn</h1>
+<section class="hero">
+  <div class="container">
+    <h1>Platform Belajar untuk<br><span>Mahasiswa Indonesia</span></h1>
+    <p>Live teaching, rekaman kuliah, dan rangkuman materi terstruktur — semua dalam satu platform.</p>
+    <div class="hero-cta">
+      <a href="signup.html" class="btn-primary">Mulai Sekarang</a>
+      <a href="#fitur" class="btn-outline">Lihat Fitur</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="num">10+</div><div class="lbl">Mata Kuliah</div></div>
+      <div class="stat-item"><div class="num">500+</div><div class="lbl">Mahasiswa Aktif</div></div>
+      <div class="stat-item"><div class="num">100+</div><div class="lbl">Video Rekaman</div></div>
+      <div class="stat-item"><div class="num">4.9★</div><div class="lbl">Rating Tutor</div></div>
+    </div>
+  </div>
+</section>
 
-<input type="email" placeholder="Email">
+<section class="section" id="fitur" style="background:white;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Semua yang Kamu Butuhkan</h2>
+      <p>Empat fitur utama untuk perjalanan belajarmu</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🔴</div>
+        <h3>C-Live</h3>
+        <p>Live teaching langsung dengan tutor. Lihat jadwal sesi, countdown, dan tanya jawab real-time.</p>
+        <div class="feat-bottom"><span class="badge badge-live">LIVE</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📄</div>
+        <h3>Ringkasin</h3>
+        <p>Rangkuman materi terstruktur per mata kuliah dan topik. Belajar efisien dengan ringkasan padat.</p>
+        <div class="feat-bottom"><span class="tag">10 Mata Kuliah</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎬</div>
+        <h3>RemindMe</h3>
+        <p>Rekaman semua sesi live teaching. Tonton ulang kapan saja, filter per tutor atau mata kuliah.</p>
+        <div class="feat-bottom"><span class="tag">100+ Video</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">👥</div>
+        <h3>Study Group</h3>
+        <p>Komunitas belajar per mata kuliah. Diskusi, berbagi catatan, dan belajar bareng mahasiswa lain.</p>
+        <div class="feat-bottom"><span class="tag">Komunitas Aktif</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<input type="password" placeholder="Password">
+<section class="section" id="matkul">
+  <div class="container">
+    <div class="section-title">
+      <h2>Mata Kuliah Tersedia</h2>
+      <p>Dari sains dasar hingga pemrograman</p>
+    </div>
+    <div class="matkul-wrap">
+      <div class="matkul-pill">📐 Kalkulus 1</div>
+      <div class="matkul-pill">📐 Kalkulus 2</div>
+      <div class="matkul-pill">📐 Kalkulus Lanjutan</div>
+      <div class="matkul-pill">⚡ Fisika Dasar</div>
+      <div class="matkul-pill">⚡ Fisika Mekanika</div>
+      <div class="matkul-pill">🧪 Kimia Dasar</div>
+      <div class="matkul-pill">🌿 Biologi</div>
+      <div class="matkul-pill">💻 Pemrograman Dasar</div>
+      <div class="matkul-pill">📊 Metodologi Penelitian</div>
+      <div class="matkul-pill">📊 Excel Dasar</div>
+    </div>
+  </div>
+</section>
 
-<a href="dashboard.html" class="btn-primary" style="display:block;text-align:center;">
-Masuk
-</a>
+<section class="section" id="harga" style="background:white;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Pilih Paket Kamu</h2>
+      <p>Fleksibel sesuai kebutuhanmu</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">Rp 49.000 <span>/bulan</span></div>
+        <div class="plan-desc">Cocok untuk yang baru mulai</div>
+        <ul class="plan-feats">
+          <li>Akses Ringkasin semua mata kuliah</li>
+          <li>Bergabung Study Group</li>
+          <li>Notifikasi jadwal C-Live</li>
+          <li>Rekaman 7 hari terakhir</li>
+        </ul>
+        <a href="signup.html" class="btn-outline" style="display:block;text-align:center;">Pilih Basic</a>
+      </div>
+      <div class="pricing-card popular">
+        <div class="pop-badge">⭐ Terpopuler</div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">Rp 99.000 <span>/bulan</span></div>
+        <div class="plan-desc">Akses penuh tanpa batas</div>
+        <ul class="plan-feats">
+          <li>Semua fitur Basic</li>
+          <li>C-Live penuh + rekaman tak terbatas</li>
+          <li>RemindMe — seluruh arsip video</li>
+          <li>Download rangkuman PDF</li>
+          <li>Prioritas tanya jawab tutor</li>
+        </ul>
+        <a href="signup.html" class="btn-primary" style="display:block;text-align:center;">Pilih Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-</div>
+<footer>
+  <div class="container">
+    <p>© 2025 CampusLearn. Dibuat untuk mahasiswa Indonesia.</p>
+  </div>
+</footer>
 
 </body>
 </html>
