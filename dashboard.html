@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Dashboard</title>
+
+<link rel="stylesheet" href="css/global.css">
+
+<style>
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:260px;
+height:100vh;
+background:#4549B5;
+padding:30px;
+color:white;
+}
+
+.sidebar h2{
+margin-bottom:30px;
+}
+
+.menu a{
+display:block;
+color:white;
+padding:12px 0;
+}
+
+.main{
+margin-left:260px;
+padding:40px;
+}
+
+.banner{
+background:linear-gradient(
+135deg,
+#4549B5,
+#5E63D9
+);
+
+padding:40px;
+border-radius:25px;
+color:white;
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.box{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>CampusLearn</h2>
+
+<div class="menu">
+
+<a href="#">🏠 Home</a>
+
+<a href="#">📄 Ringkasin</a>
+
+<a href="#">🎬 RemindMe</a>
+
+<a href="#">👥 Teman Belajar</a>
+
+<a href="#">👤 Profil</a>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="banner">
+
+<h1>
+Halo, Rakha 👋
+</h1>
+
+<p>
+Siap belajar hari ini?
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="box">
+<h3>Live Hari Ini</h3>
+<p>Kalkulus Integral</p>
+</div>
+
+<div class="box">
+<h3>Progress</h3>
+<p>72%</p>
+</div>
+
+<div class="box">
+<h3>Rekaman Terbaru</h3>
+<p>Limit Fungsi</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
