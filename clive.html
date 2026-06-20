@@ -1,43 +1,223 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>CampusLive</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C-Live – CampusLearn</title>
 <link rel="stylesheet" href="css/global.css">
+<style>
+.live-banner {
+  background: linear-gradient(135deg, #C92B0C, #E03A1D);
+  border-radius: 24px; padding: 30px 32px; color: white;
+  margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center;
+}
+.live-pulse {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; font-weight: 700; font-size: .9rem;
+}
+.dot { width: 12px; height: 12px; background: white; border-radius: 50%; animation: blink 1.4s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.live-banner h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+.live-banner p { opacity: .85; font-size: .86rem; }
+.join-live {
+  background: white; color: var(--red);
+  padding: 12px 26px; border-radius: 12px;
+  font-weight: 700; font-size: .88rem;
+  display: inline-block; margin-top: 16px; transition: opacity .2s;
+}
+.join-live:hover { opacity: .88; }
+.sec-head { display: flex; justify-content: space-between; align-items: center; margin: 28px 0 16px; }
+.sec-head h2 { font-size: 1rem; font-weight: 700; }
+.session-card {
+  background: white; border-radius: 18px; padding: 20px 22px;
+  box-shadow: 0 3px 16px rgba(0,0,0,.06);
+  display: flex; align-items: center; gap: 18px; margin-bottom: 12px;
+}
+.sc-time .t { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+.sc-time .d { font-size: .72rem; color: var(--gray); }
+.sc-info { flex: 1; }
+.sc-info h3 { font-size: .9rem; font-weight: 600; margin-bottom: 3px; }
+.sc-info p { font-size: .78rem; color: var(--gray); }
+.sc-info .tags { margin-top: 7px; }
+.cd { text-align: center; min-width: 90px; }
+.cd .cd-val { font-size: 1.1rem; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
+.cd .cd-lbl { font-size: .68rem; color: var(--gray); }
+.rec-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.rec-card {
+  background: white; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 3px 14px rgba(0,0,0,.06); transition: transform .2s;
+}
+.rec-card:hover { transform: translateY(-3px); }
+.rc-thumb {
+  height: 120px; display: flex; align-items: center;
+  justify-content: center; font-size: 2.6rem;
+}
+.rc-body { padding: 14px; }
+.rc-body h4 { font-size: .86rem; font-weight: 700; margin-bottom: 4px; }
+.rc-body p { font-size: .74rem; color: var(--gray); }
+.rc-body a { display: inline-block; margin-top: 10px; font-size: .78rem; color: var(--primary); font-weight: 600; }
+</style>
 </head>
-
 <body>
 
-<div class="live-banner">
-
-🔴 LIVE SEKARANG
-
+<div class="sidebar">
+  <div class="logo"><h2>CampusLearn</h2><span>Platform Belajar Mahasiswa</span></div>
+  <nav class="menu">
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="clive.html" class="active">🔴 C-Live</a>
+    <a href="ringkasin.html">📄 Ringkasin</a>
+    <a href="remindme.html">🎬 RemindMe</a>
+    <a href="studygroup.html">👥 Study Group</a>
+    <a href="profile.html">👤 Profil</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-info">
+      <div class="avatar" id="sb-avatar">R</div>
+      <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
+    </div>
+    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+  </div>
 </div>
 
-<div class="video-area">
+<div class="main">
+  <div class="page-header">
+    <h1>🔴 C-Live</h1>
+    <p>Sesi live teaching langsung dengan tutor</p>
+  </div>
 
-VIDEO STREAM
+  <!-- Live Now -->
+  <div class="live-banner">
+    <div>
+      <div class="live-pulse"><div class="dot"></div> SEDANG LIVE SEKARANG</div>
+      <h2>Kalkulus 2 – Integral Lipat</h2>
+      <p>Tutor: Andi Mahardika &nbsp;•&nbsp; 48 peserta bergabung</p>
+      <a href="#" class="join-live" onclick="alert('Membuka ruang live...')">▶ Masuk Ruang Live</a>
+    </div>
+    <div style="text-align:right;opacity:.8;font-size:.85rem;">
+      Sudah berlangsung<br>
+      <span style="font-size:1.4rem;font-weight:800;opacity:1;" id="elapsed">00:34:12</span>
+    </div>
+  </div>
 
+  <!-- Upcoming -->
+  <div class="sec-head"><h2>📅 Jadwal Sesi Berikutnya</h2></div>
+
+  <div class="session-card">
+    <div class="sc-time"><div class="t">14:00</div><div class="d">Hari ini</div></div>
+    <div class="sc-info">
+      <h3>Fisika Dasar – Gerak Harmonik Sederhana</h3>
+      <p>Tutor: Budi Santoso &nbsp;•&nbsp; 60 menit</p>
+      <div class="tags"><span class="tag">Fisika Dasar</span></div>
+    </div>
+    <div class="cd">
+      <div class="cd-lbl">Mulai dalam</div>
+      <div class="cd-val" id="cd1">--:--:--</div>
+    </div>
+  </div>
+
+  <div class="session-card">
+    <div class="sc-time"><div class="t">16:00</div><div class="d">Hari ini</div></div>
+    <div class="sc-info">
+      <h3>Pemrograman Dasar – Array dan Fungsi</h3>
+      <p>Tutor: Citra Dewi &nbsp;•&nbsp; 90 menit</p>
+      <div class="tags"><span class="tag">Pemrograman Dasar</span></div>
+    </div>
+    <div class="cd">
+      <div class="cd-lbl">Mulai dalam</div>
+      <div class="cd-val" id="cd2">--:--:--</div>
+    </div>
+  </div>
+
+  <div class="session-card">
+    <div class="sc-time"><div class="t">09:00</div><div class="d">Besok</div></div>
+    <div class="sc-info">
+      <h3>Kalkulus Lanjutan – Deret Taylor</h3>
+      <p>Tutor: Dian Kusuma &nbsp;•&nbsp; 75 menit</p>
+      <div class="tags"><span class="tag">Kalkulus Lanjutan</span></div>
+    </div>
+    <div><span class="badge badge-soon">Besok</span></div>
+  </div>
+
+  <div class="session-card">
+    <div class="sc-time"><div class="t">13:00</div><div class="d">Besok</div></div>
+    <div class="sc-info">
+      <h3>Kimia Dasar – Stoikiometri Lanjutan</h3>
+      <p>Tutor: Eka Putri &nbsp;•&nbsp; 60 menit</p>
+      <div class="tags"><span class="tag">Kimia Dasar</span></div>
+    </div>
+    <div><span class="badge badge-soon">Besok</span></div>
+  </div>
+
+  <!-- Recordings -->
+  <div class="sec-head" style="margin-top:36px;">
+    <h2>🎬 Rekaman Sesi Sebelumnya</h2>
+    <a href="remindme.html" style="font-size:.82rem;color:var(--primary);font-weight:500;">Lihat Semua →</a>
+  </div>
+  <div class="rec-grid">
+    <div class="rec-card">
+      <div class="rc-thumb" style="background:#EEF2FF;">📐</div>
+      <div class="rc-body"><h4>Limit Fungsi</h4><p>Kalkulus 1 • Andi • 1j 20m</p><a href="remindme.html">▶ Tonton</a></div>
+    </div>
+    <div class="rec-card">
+      <div class="rc-thumb" style="background:#FFF7ED;">⚡</div>
+      <div class="rc-body"><h4>Gerak Lurus Beraturan</h4><p>Fisika Dasar • Budi • 55m</p><a href="remindme.html">▶ Tonton</a></div>
+    </div>
+    <div class="rec-card">
+      <div class="rc-thumb" style="background:#F0FDF4;">🧪</div>
+      <div class="rc-body"><h4>Stoikiometri Dasar</h4><p>Kimia Dasar • Eka • 1j 05m</p><a href="remindme.html">▶ Tonton</a></div>
+    </div>
+    <div class="rec-card">
+      <div class="rc-thumb" style="background:#F5F3FF;">💻</div>
+      <div class="rc-body"><h4>Pengenalan Python</h4><p>Progdas • Citra • 1j 20m</p><a href="remindme.html">▶ Tonton</a></div>
+    </div>
+    <div class="rec-card">
+      <div class="rc-thumb" style="background:#FFF7ED;">📊</div>
+      <div class="rc-body"><h4>Desain Penelitian</h4><p>Metpen • Dian • 70m</p><a href="remindme.html">▶ Tonton</a></div>
+    </div>
+    <div class="rec-card">
+      <div class="rc-thumb" style="background:#F0FDF4;">🌿</div>
+      <div class="rc-body"><h4>Sel dan Organel</h4><p>Biologi • Fitri • 60m</p><a href="remindme.html">▶ Tonton</a></div>
+    </div>
+  </div>
 </div>
 
-<h2>
-Kalkulus Integral
-</h2>
+<script>
+const user = JSON.parse(localStorage.getItem('clUser') || 'null');
+if (!user) window.location.href = 'login.html';
+else {
+  const first = user.name.split(' ')[0];
+  document.getElementById('sb-name').textContent = first;
+  document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
+  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+}
+function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 
-<p>
-Tutor: Andi
-</p>
+// Countdown ke jam tertentu hari ini
+function startCountdown(h, m, elId) {
+  const el = document.getElementById(elId);
+  setInterval(() => {
+    const now = new Date();
+    const target = new Date(); target.setHours(h, m, 0, 0);
+    if (target <= now) { el.textContent = 'Sedang berlangsung'; el.style.color = 'var(--red)'; return; }
+    const d = target - now;
+    const hh = Math.floor(d / 3600000);
+    const mm = Math.floor((d % 3600000) / 60000);
+    const ss = Math.floor((d % 60000) / 1000);
+    el.textContent = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+  }, 1000);
+}
+startCountdown(14, 0, 'cd1');
+startCountdown(16, 0, 'cd2');
 
-<div>
-
-<button>✋</button>
-
-<button>🎤</button>
-
-<button>📹</button>
-
-<button>🚪</button>
-
-</div>
-
+// Elapsed timer untuk live yang sedang berlangsung (fake, mulai dari 34:12)
+let elapsedSec = 34 * 60 + 12;
+setInterval(() => {
+  elapsedSec++;
+  const m = Math.floor(elapsedSec / 60);
+  const s = elapsedSec % 60;
+  document.getElementById('elapsed').textContent =
+    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}, 1000);
+</script>
 </body>
 </html>
