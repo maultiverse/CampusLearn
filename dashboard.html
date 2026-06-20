@@ -1,128 +1,200 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Dashboard</title>
-
+<title>Dashboard – CampusLearn</title>
 <link rel="stylesheet" href="css/global.css">
-
 <style>
-
-.sidebar{
-position:fixed;
-left:0;
-top:0;
-width:260px;
-height:100vh;
-background:#4549B5;
-padding:30px;
-color:white;
+.banner {
+  background: linear-gradient(135deg, #4549B5, #5E63D9);
+  padding: 34px 36px; border-radius: 24px; color: white;
+  margin-bottom: 24px; display: flex;
+  justify-content: space-between; align-items: center;
 }
-
-.sidebar h2{
-margin-bottom:30px;
+.banner h1 { font-size: 1.7rem; }
+.banner p { opacity: .8; margin-top: 4px; font-size: .9rem; }
+.plan-pill {
+  background: rgba(255,255,255,.2); padding: 6px 16px;
+  border-radius: 20px; font-size: .78rem; font-weight: 600;
+  display: inline-block;
 }
-
-.menu a{
-display:block;
-color:white;
-padding:12px 0;
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: 20px; padding: 22px 24px; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+.stat-card .s-label { font-size: .78rem; color: var(--gray); font-weight: 500; text-transform: uppercase; letter-spacing: .4px; }
+.stat-card .s-val { font-size: 2rem; font-weight: 800; color: var(--primary); margin: 6px 0 2px; }
+.stat-card .s-sub { font-size: .78rem; color: var(--gray); }
+.two-col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; }
+.sec-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.sec-head h2 { font-size: 1rem; font-weight: 700; }
+.sec-head a { font-size: .82rem; color: var(--primary); font-weight: 500; }
+.live-row {
+  background: white; border-radius: 16px; padding: 18px 20px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.05);
+  display: flex; align-items: center; gap: 16px; margin-bottom: 10px;
 }
-
-.main{
-margin-left:260px;
-padding:40px;
+.lr-time .t { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
+.lr-time .d { font-size: .72rem; color: var(--gray); }
+.lr-info { flex: 1; }
+.lr-info h3 { font-size: .88rem; font-weight: 600; }
+.lr-info p { font-size: .76rem; color: var(--gray); margin-top: 2px; }
+.rec-row {
+  background: white; border-radius: 16px; padding: 14px 18px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.05);
+  display: flex; align-items: center; gap: 14px; margin-bottom: 10px;
 }
-
-.banner{
-background:linear-gradient(
-135deg,
-#4549B5,
-#5E63D9
-);
-
-padding:40px;
-border-radius:25px;
-color:white;
-margin-bottom:30px;
+.rec-thumb {
+  width: 70px; height: 48px; border-radius: 10px;
+  background: #EEF2FF; display: flex; align-items: center;
+  justify-content: center; font-size: 1.4rem; flex-shrink: 0;
 }
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
+.rec-info h3 { font-size: .85rem; font-weight: 600; }
+.rec-info p { font-size: .74rem; color: var(--gray); }
+.quick-link {
+  color: var(--dark); font-size: .84rem; padding: 9px 0;
+  border-bottom: 1px solid #F3F4F6; display: flex;
+  justify-content: space-between; align-items: center;
 }
-
-.box{
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-
+.quick-link:last-child { border-bottom: none; }
+.quick-link:hover { color: var(--primary); }
 </style>
-
 </head>
-
 <body>
 
 <div class="sidebar">
-
-<h2>CampusLearn</h2>
-
-<div class="menu">
-
-<a href="#">🏠 Home</a>
-
-<a href="#">📄 Ringkasin</a>
-
-<a href="#">🎬 RemindMe</a>
-
-<a href="#">👥 Teman Belajar</a>
-
-<a href="#">👤 Profil</a>
-
-</div>
-
+  <div class="logo">
+    <h2>CampusLearn</h2>
+    <span>Platform Belajar Mahasiswa</span>
+  </div>
+  <nav class="menu">
+    <a href="dashboard.html" class="active">🏠 Home</a>
+    <a href="clive.html">🔴 C-Live</a>
+    <a href="ringkasin.html">📄 Ringkasin</a>
+    <a href="remindme.html">🎬 RemindMe</a>
+    <a href="studygroup.html">👥 Study Group</a>
+    <a href="profile.html">👤 Profil</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-info">
+      <div class="avatar" id="sb-avatar">R</div>
+      <div>
+        <div class="user-name" id="sb-name">-</div>
+        <div class="user-plan" id="sb-plan">-</div>
+      </div>
+    </div>
+    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+  </div>
 </div>
 
 <div class="main">
+  <div class="banner">
+    <div>
+      <h1 id="greet">Halo, Rakha 👋</h1>
+      <p>Siap belajar hari ini? Ada 2 sesi live menunggumu.</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="plan-pill" id="banner-plan">⭐ Premium</div>
+      <div style="opacity:.65;font-size:.78rem;margin-top:8px;" id="banner-date">-</div>
+    </div>
+  </div>
 
-<div class="banner">
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="s-label">Kelas Diikuti</div>
+      <div class="s-val">45</div>
+      <div class="s-sub">Sepanjang semester</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-label">Progress</div>
+      <div class="s-val">72%</div>
+      <div class="s-sub">Target minggu ini</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-label">Rangkuman Disimpan</div>
+      <div class="s-val">18</div>
+      <div class="s-sub">Di 6 mata kuliah</div>
+    </div>
+  </div>
 
-<h1>
-Halo, Rakha 👋
-</h1>
+  <div class="two-col">
+    <div>
+      <div class="sec-head">
+        <h2>📅 Live Hari Ini</h2>
+        <a href="clive.html">Lihat Semua →</a>
+      </div>
+      <div class="live-row">
+        <div class="lr-time"><div class="t">09.00</div><div class="d">Sedang Live</div></div>
+        <div class="lr-info">
+          <h3>Kalkulus 2 – Integral Lipat</h3>
+          <p>Tutor: Andi Mahardika • 90 menit</p>
+        </div>
+        <a href="clive.html" class="btn-primary" style="font-size:.78rem;padding:8px 16px;">🔴 Join</a>
+      </div>
+      <div class="live-row">
+        <div class="lr-time"><div class="t">14.00</div><div class="d">Hari ini</div></div>
+        <div class="lr-info">
+          <h3>Fisika Dasar – Gerak Harmonik</h3>
+          <p>Tutor: Budi Santoso • 60 menit</p>
+        </div>
+        <a href="clive.html" style="background:#EEF2FF;color:var(--primary);padding:8px 16px;border-radius:10px;font-size:.78rem;font-weight:600;">Upcoming</a>
+      </div>
 
-<p>
-Siap belajar hari ini?
-</p>
+      <div class="sec-head" style="margin-top:24px;">
+        <h2>🎬 Rekaman Terbaru</h2>
+        <a href="remindme.html">Semua →</a>
+      </div>
+      <div class="rec-row">
+        <div class="rec-thumb">📐</div>
+        <div class="rec-info">
+          <h3>Limit Fungsi – Kalkulus 1</h3>
+          <p>Andi Mahardika • 1j 20m • 2 hari lalu</p>
+        </div>
+        <a href="remindme.html" style="color:var(--primary);font-size:.8rem;font-weight:600;margin-left:auto;">▶</a>
+      </div>
+      <div class="rec-row">
+        <div class="rec-thumb">⚡</div>
+        <div class="rec-info">
+          <h3>Gerak Lurus – Fisika Dasar</h3>
+          <p>Budi Santoso • 55m • 3 hari lalu</p>
+        </div>
+        <a href="remindme.html" style="color:var(--primary);font-size:.8rem;font-weight:600;margin-left:auto;">▶</a>
+      </div>
+    </div>
 
+    <div>
+      <div class="sec-head"><h2>📚 Akses Cepat</h2></div>
+      <div class="card" style="margin-bottom:16px;">
+        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;">📄 Ringkasan Populer</h3>
+        <a href="ringkasin.html" class="quick-link">📐 Kalkulus 2 <span style="color:var(--gray);font-size:.75rem;">12 topik</span></a>
+        <a href="ringkasin.html" class="quick-link">⚡ Fisika Dasar <span style="color:var(--gray);font-size:.75rem;">9 topik</span></a>
+        <a href="ringkasin.html" class="quick-link">💻 Pemrograman Dasar <span style="color:var(--gray);font-size:.75rem;">8 topik</span></a>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;">👥 Study Group Aktif</h3>
+        <a href="studygroup.html" class="quick-link">Pejuang Kalkulus <span style="color:#16a34a;font-size:.75rem;">● Live</span></a>
+        <a href="studygroup.html" class="quick-link">Fisika Bareng <span style="color:#16a34a;font-size:.75rem;">● Aktif</span></a>
+        <a href="studygroup.html" class="quick-link">Tim Progdas <span style="color:var(--gray);font-size:.75rem;">● Offline</span></a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="grid">
+<script>
+const user = JSON.parse(localStorage.getItem('clUser') || 'null');
+if (!user) window.location.href = 'login.html';
+else {
+  const first = user.name.split(' ')[0];
+  document.getElementById('greet').textContent = `Halo, ${first} 👋`;
+  document.getElementById('sb-name').textContent = first;
+  document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
+  const planLabel = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  document.getElementById('sb-plan').textContent = planLabel;
+  document.getElementById('banner-plan').textContent = planLabel;
+}
+document.getElementById('banner-date').textContent =
+  new Date().toLocaleDateString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 
-<div class="box">
-<h3>Live Hari Ini</h3>
-<p>Kalkulus Integral</p>
-</div>
-
-<div class="box">
-<h3>Progress</h3>
-<p>72%</p>
-</div>
-
-<div class="box">
-<h3>Rekaman Terbaru</h3>
-<p>Limit Fungsi</p>
-</div>
-
-</div>
-
-</div>
-
+function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
+</script>
 </body>
 </html>
