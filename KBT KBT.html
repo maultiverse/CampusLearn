@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusLearn</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --blue:#1E5EFF;
+    --orange:#FF8A00;
+    --cream:#FFF8ED;
+    --white:#FFFFFF;
+    --gray:#F3F4F6;
+    --dark:#1F2937;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--cream);
+    font-family:'Caladea', serif;
+    color:var(--dark);
+}
+
+.container{
+    max-width:430px;
+    margin:auto;
+    background:white;
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+/* LOGIN */
+
+.login{
+    padding:30px;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo h1{
+    color:var(--blue);
+    font-size:36px;
+}
+
+.logo span{
+    color:var(--orange);
+}
+
+.tagline{
+    text-align:center;
+    margin-top:10px;
+}
+
+.tabs{
+    display:flex;
+    background:#eee;
+    border-radius:15px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.tabs button{
+    flex:1;
+    border:none;
+    padding:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.active-tab{
+    background:var(--blue);
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:var(--blue);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.google{
+    background:white;
+    color:black;
+    border:1px solid #ddd;
+    margin-top:10px;
+}
+
+/* DASHBOARD */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+}
+
+.profile{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:var(--blue);
+}
+
+.notification{
+    font-size:24px;
+}
+
+.banner{
+    margin:20px;
+    background:linear-gradient(135deg,var(--blue),#4f85ff);
+    color:white;
+    padding:20px;
+    border-radius:20px;
+}
+
+.card{
+    background:white;
+    margin:15px 20px;
+    padding:15px;
+    border-radius:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.card-title{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.schedule{
+    display:flex;
+    justify-content:space-between;
+}
+
+.shortcuts{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    padding:0 20px;
+}
+
+.shortcut{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.progress{
+    height:10px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:72%;
+    height:100%;
+    background:var(--orange);
+}
+
+.record{
+    display:flex;
+    gap:10px;
+}
+
+.thumbnail{
+    width:100px;
+    height:60px;
+    background:#ddd;
+    border-radius:10px;
+}
+
+/* SEARCH */
+
+.search{
+    margin:20px;
+}
+
+.search input{
+    margin-bottom:0;
+}
+
+.chips{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    padding:0 20px;
+}
+
+.chip{
+    background:#eee;
+    padding:8px 15px;
+    border-radius:30px;
+    white-space:nowrap;
+}
+
+.chip.active{
+    background:var(--orange);
+    color:white;
+}
+
+/* STUDY GROUP */
+
+.group-card{
+    margin:15px 20px;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+}
+
+.chat-box{
+    height:250px;
+    overflow:auto;
+    padding:15px;
+}
+
+.bubble{
+    background:#f3f4f6;
+    padding:10px;
+    border-radius:15px;
+    margin-bottom:10px;
+    width:max-content;
+    max-width:80%;
+}
+
+.bubble.me{
+    background:var(--blue);
+    color:white;
+    margin-left:auto;
+}
+
+/* LIVE */
+
+.live-banner{
+    background:red;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-weight:bold;
+}
+
+.video-area{
+    margin:20px;
+    height:220px;
+    background:#000;
+    border-radius:20px;
+}
+
+.live-controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:15px;
+}
+
+.control{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:var(--orange);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+
+/* PROFILE */
+
+.profile-page{
+    padding:20px;
+}
+
+.profile-large{
+    text-align:center;
+}
+
+.profile-large .avatar{
+    width:80px;
+    height:80px;
+    margin:auto;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.stat{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    max-width:430px;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:12px;
+    box-shadow:0 -3px 15px rgba(0,0,0,.08);
+}
+
+.nav-item{
+    text-align:center;
+    font-size:12px;
+}
+
+.section-title{
+    padding:0 20px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LOGIN -->
+
+<section class="login">
+
+<div class="logo">
+<h1>Campus<span>Learn</span></h1>
+<p class="tagline">
+Belajar Lebih Cerdas, Bersama Teman Seperjuangan
+</p>
+</div>
+
+<div class="tabs">
+<button class="active-tab">Masuk</button>
+<button>Daftar</button>
+</div>
+
+<input placeholder="Email / NIM">
+<input type="password" placeholder="Kata Sandi">
+
+<button class="btn">Masuk</button>
+
+<button class="btn google">
+Login dengan Google
+</button>
+
+</section>
+
+<hr>
+
+<!-- HOME -->
+
+<div class="header">
+
+<div class="profile">
+<div class="avatar"></div>
+
+<div>
+<b>Rakha</b>
+<br>
+Mahasiswa ITS
+</div>
+</div>
+
+<div class="notification">🔔</div>
+
+</div>
+
+<div class="banner">
+<h2>Halo, Rakha! 👋</h2>
+<p>Siap belajar hari ini?</p>
+</div>
+
+<div class="card">
+<div class="card-title">
+Live Hari Ini
+</div>
+
+<div class="schedule">
+<div>
+Kalkulus Integral
+<br>
+19.00 WIB
+</div>
+
+<div>
+Tutor:
+Andi
+</div>
+</div>
+</div>
+
+<div class="shortcuts">
+
+<div class="shortcut">
+🎬<br>RemindMe
+</div>
+
+<div class="shortcut">
+📄<br>Ringkasin
+</div>
+
+<div class="shortcut">
+👥<br>Teman Belajar
+</div>
+
+</div>
+
+<div class="section-title">
+Progress Mingguan
+</div>
+
+<div class="card">
+<div class="progress">
+<div class="progress-fill"></div>
+</div>
+<br>
+72% target tercapai
+</div>
+
+<div class="section-title">
+Rekaman Terbaru
+</div>
+
+<div class="card">
+
+<div class="record">
+<div class="thumbnail"></div>
+
+<div>
+<b>Limit Fungsi</b>
+<br>
+Tutor Budi
+</div>
+</div>
+
+</div>
+
+<!-- REMINDME -->
+
+<div class="section-title">
+REMINDME
+</div>
+
+<div class="search">
+<input placeholder="Cari rekaman...">
+</div>
+
+<div class="chips">
+<div class="chip active">Semua</div>
+<div class="chip">Kalkulus</div>
+<div class="chip">Fisika</div>
+<div class="chip">Kimia</div>
+</div>
+
+<div class="card">
+🎬 Turunan Fungsi
+<br>
+Durasi 1 jam 20 menit
+<br>
+Tutor: Andi
+<br>
+🆕 Baru
+</div>
+
+<!-- RINGKASIN -->
+
+<div class="section-title">
+RINGKASIN
+</div>
+
+<div class="card">
+📘 Kalkulus
+<br>
+12 Topik
+</div>
+
+<div class="card">
+⚛️ Fisika Dasar
+<br>
+9 Topik
+</div>
+
+<!-- STUDY GROUP -->
+
+<div class="section-title">
+TEMAN BELAJAR
+</div>
+
+<div class="group-card">
+<b>Pejuang Kalkulus A</b>
+<br>
+120 anggota
+</div>
+
+<div class="card">
+
+<div class="chat-box">
+
+<div class="bubble">
+Halo semuanya 👋
+</div>
+
+<div class="bubble me">
+Ada yang paham integral parsial?
+</div>
+
+</div>
+
+</div>
+
+<!-- LIVE -->
+
+<div class="section-title">
+CLIVE
+</div>
+
+<div class="live-banner">
+🔴 LIVE Sedang Berlangsung
+</div>
+
+<div class="video-area"></div>
+
+<div class="live-controls">
+
+<div class="control">✋</div>
+<div class="control">🎤</div>
+<div class="control">📹</div>
+<div class="control">🚪</div>
+
+</div>
+
+<!-- PROFILE -->
+
+<div class="section-title">
+PROFIL
+</div>
+
+<div class="profile-page">
+
+<div class="profile-large">
+
+<div class="avatar"></div>
+
+<h3>Rakha Pratama</h3>
+
+<p>
+ITS • Statistika
+</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+45
+<br>
+Kelas
+</div>
+
+<div class="stat">
+18
+<br>
+Rangkuman
+</div>
+
+<div class="stat">
+7
+<br>
+Grup
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="bottom-nav">
+
+<div class="nav-item">
+🏠<br>Home
+</div>
+
+<div class="nav-item">
+📄<br>Ringkasin
+</div>
+
+<div class="nav-item">
+🎬<br>RemindMe
+</div>
+
+<div class="nav-item">
+👥<br>Teman Belajar
+</div>
+
+<div class="nav-item">
+👤<br>Profil
+</div>
+
+</div>
+
+</body>
+</html>
