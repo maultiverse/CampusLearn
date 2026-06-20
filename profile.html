@@ -1,64 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Profil</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profil – CampusLearn</title>
 <link rel="stylesheet" href="css/global.css">
+<style>
+.prof-top {
+  background: white; border-radius: 24px; padding: 30px 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06); margin-bottom: 22px;
+  display: flex; align-items: center; gap: 28px;
+}
+.big-avatar {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: var(--primary); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; font-weight: 700; flex-shrink: 0;
+  overflow: hidden;
+}
+.big-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.prof-name { font-size: 1.35rem; font-weight: 800; }
+.prof-sub { color: var(--gray); font-size: .85rem; margin-top: 4px; }
+.plan-chip { display: inline-block; margin-top: 12px; padding: 6px 16px; border-radius: 20px; font-size: .78rem; font-weight: 600; background: #FEF9C3; color: #92400E; }
+.plan-chip.basic { background: #EFF6FF; color: #1D4ED8; }
+.stats-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 22px; }
+.s-box { background: white; border-radius: 18px; padding: 22px 20px; text-align: center; box-shadow: 0 3px 14px rgba(0,0,0,.06); }
+.s-box .num { font-size: 2rem; font-weight: 800; color: var(--primary); }
+.s-box .lbl { font-size: .78rem; color: var(--gray); margin-top: 4px; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
+.info-card { background: white; border-radius: 18px; padding: 22px; box-shadow: 0 3px 14px rgba(0,0,0,.06); }
+.info-card h3 { font-size: .92rem; font-weight: 700; margin-bottom: 16px; }
+.info-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #F3F4F6; font-size: .85rem; }
+.info-row:last-child { border-bottom: none; }
+.info-row .lbl { color: var(--gray); }
+.logout-row { background: white; border-radius: 18px; padding: 20px 24px; box-shadow: 0 3px 14px rgba(0,0,0,.06); display: flex; justify-content: space-between; align-items: center; }
+</style>
 </head>
-
 <body>
 
-<div class="profile-header">
-
-<img
-src="assets/avatar.png"
-width="100"
->
-
-<h1>
-Rakha Pratama
-</h1>
-
-<p>
-ITS • Statistika
-</p>
-
+<div class="sidebar">
+  <div class="logo"><h2>CampusLearn</h2><span>Platform Belajar Mahasiswa</span></div>
+  <nav class="menu">
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="clive.html">🔴 C-Live</a>
+    <a href="ringkasin.html">📄 Ringkasin</a>
+    <a href="remindme.html">🎬 RemindMe</a>
+    <a href="studygroup.html">👥 Study Group</a>
+    <a href="profile.html" class="active">👤 Profil</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-info">
+      <div class="avatar" id="sb-avatar">R</div>
+      <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
+    </div>
+    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+  </div>
 </div>
 
-<div class="card">
+<div class="main">
+  <div class="page-header">
+    <h1>👤 Profil Saya</h1>
+    <p>Informasi akun dan aktivitas belajar</p>
+  </div>
 
-<h3>Total Kelas</h3>
+  <div class="prof-top">
+    <div class="big-avatar" id="big-av">R</div>
+    <div>
+      <div class="prof-name" id="p-name">-</div>
+      <div class="prof-sub" id="p-sub">-</div>
+      <div class="plan-chip" id="p-chip">⭐ Premium</div>
+    </div>
+    <div style="margin-left:auto;">
+      <a href="index.html#harga" class="btn-outline" style="font-size:.82rem;padding:10px 20px;">🔄 Ganti Paket</a>
+    </div>
+  </div>
 
-<p>
-45
-</p>
+  <div class="stats-3">
+    <div class="s-box"><div class="num">45</div><div class="lbl">Total Kelas</div></div>
+    <div class="s-box"><div class="num">18</div><div class="lbl">Rangkuman Disimpan</div></div>
+    <div class="s-box"><div class="num">🔥 12</div><div class="lbl">Hari Streak</div></div>
+  </div>
 
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>📋 Informasi Akun</h3>
+      <div class="info-row"><span class="lbl">Nama</span><span id="i-name">-</span></div>
+      <div class="info-row"><span class="lbl">Email</span><span id="i-email">-</span></div>
+      <div class="info-row"><span class="lbl">NIM</span><span id="i-nim">-</span></div>
+      <div class="info-row"><span class="lbl">Program Studi</span><span id="i-prodi">-</span></div>
+      <div class="info-row"><span class="lbl">Paket</span><span id="i-plan">-</span></div>
+    </div>
+    <div class="info-card">
+      <h3>📈 Aktivitas Belajar</h3>
+      <div class="info-row"><span class="lbl">Kelas Diikuti</span><span>45</span></div>
+      <div class="info-row"><span class="lbl">Video Ditonton</span><span>32</span></div>
+      <div class="info-row"><span class="lbl">Rangkuman Dibaca</span><span>18</span></div>
+      <div class="info-row"><span class="lbl">Study Group</span><span>7</span></div>
+      <div class="info-row"><span class="lbl">Streak Belajar</span><span style="color:var(--orange);font-weight:600;">🔥 12 hari</span></div>
+    </div>
+  </div>
+
+  <div class="logout-row">
+    <div>
+      <div style="font-weight:600;">Keluar dari Akun</div>
+      <div style="font-size:.8rem;color:var(--gray);margin-top:2px;">Kamu akan diarahkan ke halaman login</div>
+    </div>
+    <button onclick="logout()" style="background:var(--red);color:white;border:none;padding:11px 22px;border-radius:12px;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;font-size:.84rem;">
+      🚪 Keluar
+    </button>
+  </div>
 </div>
 
-<div class="card">
+<script>
+const user = JSON.parse(localStorage.getItem('clUser') || 'null');
+if (!user) window.location.href = 'login.html';
+else {
+  const first = user.name.split(' ')[0];
+  document.getElementById('sb-name').textContent = first;
+  document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
+  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  document.getElementById('big-av').textContent = first[0].toUpperCase();
+  document.getElementById('p-name').textContent = user.name;
+  document.getElementById('p-sub').textContent = `NIM: ${user.nim||'-'} • ${user.prodi||'-'}`;
 
-<h3>Rangkuman Disimpan</h3>
+  const chip = document.getElementById('p-chip');
+  if (user.plan === 'premium') { chip.textContent = '⭐ Paket Premium'; }
+  else { chip.textContent = '🔵 Paket Basic'; chip.classList.add('basic'); }
 
-<p>
-18
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Grup Aktif</h3>
-
-<p>
-7
-</p>
-
-</div>
-
-<a href="login.html">
-
-Keluar Akun
-
-</a>
-
+  document.getElementById('i-name').textContent = user.name;
+  document.getElementById('i-email').textContent = user.email;
+  document.getElementById('i-nim').textContent = user.nim || '-';
+  document.getElementById('i-prodi').textContent = user.prodi || '-';
+  document.getElementById('i-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+}
+function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
+</script>
 </body>
 </html>
