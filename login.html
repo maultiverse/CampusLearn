@@ -1,69 +1,99 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Login</title>
-
+<title>Masuk – CampusLearn</title>
 <link rel="stylesheet" href="css/global.css">
-
 <style>
-
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+body { display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; gap: 20px; }
+.login-box {
+  background: white; width: 420px; padding: 40px;
+  border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,.09);
 }
-
-.login-box{
-background:white;
-width:420px;
-padding:40px;
-border-radius:25px;
-box-shadow:0 10px 40px rgba(0,0,0,.08);
+.login-box h1 { text-align: center; font-size: 1.5rem; margin-bottom: 6px; }
+.subtitle { text-align: center; color: var(--gray); font-size: .86rem; margin-bottom: 28px; }
+.input-group { margin-bottom: 16px; }
+.input-group label { display: block; font-size: .84rem; font-weight: 500; margin-bottom: 6px; }
+input {
+  width: 100%; padding: 13px 16px;
+  border: 1.5px solid #E5E7EB; border-radius: 12px;
+  font-family: 'Poppins', sans-serif; font-size: .9rem;
+  transition: border-color .2s;
 }
-
-h1{
-text-align:center;
-margin-bottom:25px;
+input:focus { outline: none; border-color: var(--primary); }
+.err { color: var(--red); font-size: .8rem; margin-top: 8px; display: none; }
+.demo-info {
+  background: #EEF2FF; border-radius: 12px;
+  padding: 14px 18px; font-size: .8rem; color: var(--primary);
+  width: 420px;
 }
-
-input{
-width:100%;
-padding:14px;
-border:1px solid #ddd;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-button{
-width:100%;
-border:none;
-cursor:pointer;
-}
-
+.demo-info strong { display: block; margin-bottom: 4px; }
 </style>
-
 </head>
-
 <body>
 
 <div class="login-box">
+  <h1>CampusLearn 🎓</h1>
+  <p class="subtitle">Masuk ke akun kamu</p>
 
-<h1>CampusLearn</h1>
+  <div class="input-group">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="email@example.com">
+  </div>
+  <div class="input-group">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="••••••••">
+  </div>
+  <p class="err" id="err">Email atau password salah!</p>
 
-<input type="email" placeholder="Email">
+  <button onclick="doLogin()" class="btn-primary"
+    style="width:100%;border:none;cursor:pointer;font-size:.95rem;margin-top:8px;">
+    Masuk
+  </button>
 
-<input type="password" placeholder="Password">
-
-<a href="dashboard.html" class="btn-primary" style="display:block;text-align:center;">
-Masuk
-</a>
-
+  <p style="text-align:center;margin-top:20px;font-size:.84rem;color:var(--gray);">
+    Belum punya akun?
+    <a href="signup.html" style="color:var(--primary);font-weight:600;">Daftar Sekarang</a>
+  </p>
+  <p style="text-align:center;margin-top:8px;font-size:.82rem;">
+    <a href="index.html" style="color:var(--gray);">← Kembali ke Beranda</a>
+  </p>
 </div>
 
+<div class="demo-info">
+  <strong>🔑 Akun Demo untuk Coba:</strong>
+  Email: demo@campuslearn.id &nbsp;|&nbsp; Password: campuslearn123
+</div>
+
+<script>
+// Kalau sudah login, langsung ke dashboard
+if (localStorage.getItem('clUser')) window.location.href = 'dashboard.html';
+
+const DEMO = {
+  email: 'demo@campuslearn.id', password: 'campuslearn123',
+  name: 'Rakha Pratama', nim: '5002211001',
+  prodi: 'Statistika', univ: 'ITS', plan: 'premium'
+};
+
+function doLogin() {
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value;
+  const errEl = document.getElementById('err');
+
+  const saved = JSON.parse(localStorage.getItem('clAccounts') || '[]');
+  const all   = [DEMO, ...saved];
+  const found = all.find(a => a.email === email && a.password === pass);
+
+  if (found) {
+    localStorage.setItem('clUser', JSON.stringify(found));
+    window.location.href = 'dashboard.html';
+  } else {
+    errEl.style.display = 'block';
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
 </body>
 </html>
