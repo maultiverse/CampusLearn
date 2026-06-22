@@ -24,6 +24,7 @@
   height: 130px; display: flex; align-items: center;
   justify-content: center; font-size: 2.8rem; position: relative;
 }
+.v-thumb img { width: 80px; height: 80px; object-fit: contain; }
 .v-dur {
   position: absolute; bottom: 8px; right: 8px;
   background: rgba(0,0,0,.55); color: white;
@@ -69,7 +70,7 @@
     <p>Rekaman semua sesi live teaching — tonton kapan saja</p>
   </div>
 
-  <input type="text" class="search-bar" id="q" placeholder="🔍 Cari rekaman, tutor, atau mata kuliah..." oninput="render()">
+  <input type="text" class="search-bar" id="q" placeholder="🔍︎Cari rekaman, tutor, atau mata kuliah..." oninput="render()">
 
   <div class="filter-row" id="filters">
     <button class="f-btn active" onclick="setFilter('Semua',this)">Semua</button>
@@ -97,18 +98,18 @@ else {
 function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 
 const videos = [
-  { icon:'📐', bg:'#EEF2FF', title:'Limit Fungsi', matkul:'Kalkulus 1', tutor:'Andi Mahardika', dur:'1j 20m', date:'2 hari lalu', premium:false },
-  { icon:'📐', bg:'#EEF2FF', title:'Turunan & Aturan Rantai', matkul:'Kalkulus 1', tutor:'Andi Mahardika', dur:'1j 05m', date:'5 hari lalu', premium:false },
-  { icon:'📐', bg:'#EEF2FF', title:'Integral Parsial', matkul:'Kalkulus 2', tutor:'Andi Mahardika', dur:'1j 30m', date:'1 minggu lalu', premium:true },
-  { icon:'📐', bg:'#EEF2FF', title:'Deret Taylor', matkul:'Kalkulus Lanjutan', tutor:'Dian Kusuma', dur:'1j 30m', date:'2 minggu lalu', premium:true },
-  { icon:'⚡', bg:'#FFF7ED', title:'Gerak Lurus Beraturan', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'55m', date:'3 hari lalu', premium:false },
-  { icon:'⚡', bg:'#FFF7ED', title:'Hukum Newton', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'1j 10m', date:'1 minggu lalu', premium:true },
-  { icon:'🧪', bg:'#F0FDF4', title:'Stoikiometri Dasar', matkul:'Kimia Dasar', tutor:'Eka Putri', dur:'1j 05m', date:'4 hari lalu', premium:false },
-  { icon:'🌿', bg:'#F0FDF4', title:'Sel & Organel', matkul:'Biologi', tutor:'Fitri Amelia', dur:'60m', date:'6 hari lalu', premium:true },
-  { icon:'💻', bg:'#F5F3FF', title:'Pengenalan Python', matkul:'Pemrograman Dasar', tutor:'Citra Dewi', dur:'1j 20m', date:'2 hari lalu', premium:false },
-  { icon:'💻', bg:'#F5F3FF', title:'Perulangan & Array', matkul:'Pemrograman Dasar', tutor:'Citra Dewi', dur:'1j 15m', date:'5 hari lalu', premium:true },
-  { icon:'📊', bg:'#FFF7ED', title:'Desain Penelitian', matkul:'Metodologi Penelitian', tutor:'Dian Kusuma', dur:'70m', date:'1 minggu lalu', premium:true },
-  { icon:'📊', bg:'#FFF7ED', title:'VLOOKUP & PivotTable', matkul:'Excel Dasar', tutor:'Andi Mahardika', dur:'50m', date:'3 hari lalu', premium:false },
+  { icon:'<img src="assets/kalku.png">', bg:'#EEF2FF', title:'Limit Fungsi', matkul:'Kalkulus 1', tutor:'Andi Mahardika', dur:'1j 20m', date:'2 hari lalu', premium:false },
+  { icon:'<img src="assets/kalku.png">', bg:'#EEF2FF', title:'Turunan & Aturan Rantai', matkul:'Kalkulus 1', tutor:'Andi Mahardika', dur:'1j 05m', date:'5 hari lalu', premium:false },
+  { icon:'<img src="assets/kalku2.png">', bg:'#EEF2FF', title:'Integral Parsial', matkul:'Kalkulus 2', tutor:'Andi Mahardika', dur:'1j 30m', date:'1 minggu lalu', premium:true },
+  { icon:'<img src="assets/kalku2.png">', bg:'#EEF2FF', title:'Deret Taylor', matkul:'Kalkulus Lanjutan', tutor:'Dian Kusuma', dur:'1j 30m', date:'2 minggu lalu', premium:true },
+  { icon:'<img src="assets/fisika 1.png">', bg:'#FFF7ED', title:'Gerak Lurus Beraturan', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'55m', date:'3 hari lalu', premium:false },
+  { icon:'<img src="assets/fisika 1.png">', bg:'#FFF7ED', title:'Hukum Newton', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'1j 10m', date:'1 minggu lalu', premium:true },
+  { icon:'<img src="assets/kimia1.png">', bg:'#F0FDF4', title:'Stoikiometri Dasar', matkul:'Kimia Dasar', tutor:'Eka Putri', dur:'1j 05m', date:'4 hari lalu', premium:false },
+  { icon:'<img src="assets/bio1.png">', bg:'#F0FDF4', title:'Sel & Organel', matkul:'Biologi', tutor:'Fitri Amelia', dur:'60m', date:'6 hari lalu', premium:true },
+  { icon:'<img src="assets/data.png">', bg:'#F5F3FF', title:'Pengenalan Python', matkul:'Pemrograman Dasar', tutor:'Citra Dewi', dur:'1j 20m', date:'2 hari lalu', premium:false },
+  { icon:'<img src="assets/data.png">', bg:'#F5F3FF', title:'Perulangan & Array', matkul:'Pemrograman Dasar', tutor:'Citra Dewi', dur:'1j 15m', date:'5 hari lalu', premium:true },
+  { icon:'<img src="assets/metopen.png">', bg:'#FFF7ED', title:'Desain Penelitian', matkul:'Metodologi Penelitian', tutor:'Dian Kusuma', dur:'70m', date:'1 minggu lalu', premium:true },
+  { icon:'<img src="assets/data.png">', bg:'#FFF7ED', title:'VLOOKUP & PivotTable', matkul:'Excel Dasar', tutor:'Andi Mahardika', dur:'50m', date:'3 hari lalu', premium:false },
 ];
 
 let activeFilter = 'Semua';
