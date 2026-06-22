@@ -14,6 +14,7 @@
 }
 .mk-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
 .mk-icon { font-size: 2rem; margin-bottom: 12px; }
+.mk-icon img { width: 56px; height: 56px; object-fit: contain; }
 .mk-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
 .mk-card .tc { font-size: .78rem; color: var(--gray); margin-bottom: 14px; }
 .prog-bar { background: #F3F4F6; border-radius: 20px; height: 6px; }
@@ -44,6 +45,7 @@
 .topic-list li:last-child { border-bottom: none; }
 .t-done { color: #16a34a; font-weight: 600; font-size: .76rem; }
 .t-todo { color: var(--gray); font-size: .76rem; }
+#m-icon img { width: 48px; height: 48px; object-fit: contain; }
 </style>
 </head>
 <body>
@@ -83,7 +85,7 @@
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div id="m-icon" style="font-size:1.7rem;margin-bottom:6px;"></div>
+        <div id="m-icon" style="margin-bottom:6px;"></div>
         <h2 id="m-title"></h2>
       </div>
       <div class="modal-close" onclick="closeModalDirect()">✕</div>
@@ -104,16 +106,16 @@ else {
 function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 
 const data = [
-  { icon:'📐', name:'Kalkulus 1', prog:80, topics:['Limit Fungsi','Turunan (Diferensial)','Aturan Rantai','Aplikasi Turunan','Fungsi Implisit','Teorema Nilai Rata-Rata','Integral Tak Tentu','Integral Tertentu','Teorema Dasar Kalkulus','Teknik Substitusi','Integral Parsial','Luas Daerah'] },
-  { icon:'📐', name:'Kalkulus 2', prog:60, topics:['Integral Lipat Dua','Integral Lipat Tiga','Koordinat Polar','Deret Tak Hingga','Deret Taylor & Maclaurin','Persamaan Diferensial Orde 1','Persamaan Diferensial Orde 2','Transformasi Laplace','Vektor di R3','Fungsi Vektor','Volume Benda Putar'] },
-  { icon:'📐', name:'Kalkulus Lanjutan', prog:30, topics:['Analisis Real','Barisan & Deret','Konvergensi','Fungsi Multi-variabel','Gradien & Divergen','Teorema Green','Teorema Stokes','Integral Garis','Integral Permukaan'] },
-  { icon:'⚡', name:'Fisika Dasar', prog:70, topics:['Kinematika','Dinamika Newton','Usaha & Energi','Momentum & Impuls','Gerak Rotasi','Fluida Statis','Fluida Dinamis','Termofisika','Gelombang','Optika Geometris'] },
-  { icon:'⚡', name:'Fisika Mekanika', prog:45, topics:['Mekanika Lagrange','Mekanika Hamilton','Gerak Osilasi','Medan Sentral','Mekanika Benda Tegar','Mekanika Fluida Lanjutan','Relativitas Khusus','Mekanika Kuantum Pengantar'] },
-  { icon:'🧪', name:'Kimia Dasar', prog:55, topics:['Struktur Atom','Tabel Periodik','Ikatan Kimia','Stoikiometri','Larutan','Asam & Basa','Reaksi Redoks','Termokimia','Kinetika Kimia','Kesetimbangan Kimia'] },
-  { icon:'🌿', name:'Biologi', prog:65, topics:['Sel & Organel','Membran Sel','Metabolisme Sel','DNA & RNA','Sintesis Protein','Pembelahan Sel','Genetika Mendel','Evolusi','Ekosistem'] },
-  { icon:'💻', name:'Pemrograman Dasar', prog:75, topics:['Algoritma & Flowchart','Variabel & Tipe Data','Operator','Percabangan (if-else)','Perulangan (loop)','Array','Fungsi / Prosedur','String','Rekursi','Pengantar OOP'] },
-  { icon:'📊', name:'Metodologi Penelitian', prog:50, topics:['Jenis Penelitian','Rumusan Masalah','Tinjauan Pustaka','Hipotesis','Instrumen Penelitian','Analisis Data Kuantitatif','Analisis Data Kualitatif','Penulisan Laporan'] },
-  { icon:'📊', name:'Excel Dasar', prog:40, topics:['Antarmuka Excel','Rumus Dasar (SUM, AVERAGE)','Referensi Sel','Fungsi IF','Fungsi VLOOKUP','Grafik & Chart','PivotTable','Format & Print'] },
+  { icon:'<img src="assets/kalku.png">', name:'Kalkulus 1', prog:80, topics:['Limit Fungsi','Turunan (Diferensial)','Aturan Rantai','Aplikasi Turunan','Fungsi Implisit','Teorema Nilai Rata-Rata','Integral Tak Tentu','Integral Tertentu','Teorema Dasar Kalkulus','Teknik Substitusi','Integral Parsial','Luas Daerah'] },
+  { icon:'<img src="assets/kalku2.png">', name:'Kalkulus 2', prog:60, topics:['Integral Lipat Dua','Integral Lipat Tiga','Koordinat Polar','Deret Tak Hingga','Deret Taylor & Maclaurin','Persamaan Diferensial Orde 1','Persamaan Diferensial Orde 2','Transformasi Laplace','Vektor di R3','Fungsi Vektor','Volume Benda Putar'] },
+  { icon:'<img src="assets/kalku2.png">', name:'Kalkulus Lanjutan', prog:30, topics:['Analisis Real','Barisan & Deret','Konvergensi','Fungsi Multi-variabel','Gradien & Divergen','Teorema Green','Teorema Stokes','Integral Garis','Integral Permukaan'] },
+  { icon:'<img src="assets/fisika1.png">', name:'Fisika Dasar', prog:70, topics:['Kinematika','Dinamika Newton','Usaha & Energi','Momentum & Impuls','Gerak Rotasi','Fluida Statis','Fluida Dinamis','Termofisika','Gelombang','Optika Geometris'] },
+  { icon:'<img src="assets/fisika2.png">', name:'Fisika Mekanika', prog:45, topics:['Mekanika Lagrange','Mekanika Hamilton','Gerak Osilasi','Medan Sentral','Mekanika Benda Tegar','Mekanika Fluida Lanjutan','Relativitas Khusus','Mekanika Kuantum Pengantar'] },
+  { icon:'<img src="assets/kimia1.png">', name:'Kimia Dasar', prog:55, topics:['Struktur Atom','Tabel Periodik','Ikatan Kimia','Stoikiometri','Larutan','Asam & Basa','Reaksi Redoks','Termokimia','Kinetika Kimia','Kesetimbangan Kimia'] },
+  { icon:'<img src="assets/bio1.png">', name:'Biologi', prog:65, topics:['Sel & Organel','Membran Sel','Metabolisme Sel','DNA & RNA','Sintesis Protein','Pembelahan Sel','Genetika Mendel','Evolusi','Ekosistem'] },
+  { icon:'<img src="assets/data.png">', name:'Pemrograman Dasar', prog:75, topics:['Algoritma & Flowchart','Variabel & Tipe Data','Operator','Percabangan (if-else)','Perulangan (loop)','Array','Fungsi / Prosedur','String','Rekursi','Pengantar OOP'] },
+  { icon:'<img src="assets/metopen.png">', name:'Metodologi Penelitian', prog:50, topics:['Jenis Penelitian','Rumusan Masalah','Tinjauan Pustaka','Hipotesis','Instrumen Penelitian','Analisis Data Kuantitatif','Analisis Data Kualitatif','Penulisan Laporan'] },
+  { icon:'<img src="assets/data.png">', name:'Excel Dasar', prog:40, topics:['Antarmuka Excel','Rumus Dasar (SUM, AVERAGE)','Referensi Sel','Fungsi IF','Fungsi VLOOKUP','Grafik & Chart','PivotTable','Format & Print'] },
 ];
 
 function render(list) {
@@ -141,7 +143,7 @@ let current = [];
 function openModal(i) {
   current = data;
   const m = current[i] || data[i];
-  document.getElementById('m-icon').textContent = m.icon;
+  document.getElementById('m-icon').innerHTML = m.icon; // ganti textContent → innerHTML
   document.getElementById('m-title').textContent = m.name;
   const doneCount = Math.round(m.topics.length * m.prog / 100);
   document.getElementById('m-topics').innerHTML = m.topics.map((t,ti) => `
