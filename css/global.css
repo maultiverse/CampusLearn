@@ -14,17 +14,15 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--dark); }
+body { font-family: 'Poppins', sans-serif; background: #fd9a1a; color: var(--dark); }
 a { text-decoration: none; }
 .container { width: 90%; max-width: 1200px; margin: auto; }
 
-/* Buttons */
 .btn-primary {
   background: var(--orange); color: white;
   padding: 14px 28px; border-radius: 12px;
   font-weight: 600; display: inline-block;
-  transition: background .2s;
-  font-family: 'Poppins', sans-serif;
+  transition: background .2s; font-family: 'Poppins', sans-serif;
 }
 .btn-primary:hover { background: var(--orange-dark); }
 
@@ -33,8 +31,7 @@ a { text-decoration: none; }
   border: 2px solid var(--primary);
   padding: 12px 26px; border-radius: 12px;
   font-weight: 600; display: inline-block;
-  transition: all .2s;
-  font-family: 'Poppins', sans-serif;
+  transition: all .2s; font-family: 'Poppins', sans-serif;
 }
 .btn-outline:hover { background: var(--primary); color: white; }
 
@@ -42,15 +39,14 @@ a { text-decoration: none; }
 .sidebar {
   position: fixed; left: 0; top: 0;
   width: var(--sidebar-w); height: 100vh;
-  background: #ffffff; /* ← PUTIH */
+  background: #ffffff;
   padding: 30px 20px;
   color: var(--dark);
   display: flex; flex-direction: column;
   z-index: 100;
-  border-right: 1px solid #E5E7EB; /* garis pemisah tipis */
+  border-right: 1px solid #E5E7EB;
   box-shadow: 2px 0 12px rgba(0,0,0,.05);
 }
-
 .sidebar .logo { margin-bottom: 40px; }
 .sidebar .logo h2 { font-size: 1.1rem; font-weight: 800; color: var(--primary); }
 .sidebar .logo span { font-size: .72rem; color: var(--gray); }
@@ -71,18 +67,14 @@ a { text-decoration: none; }
 .sidebar-bottom .user-info {
   display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
 }
-
 .avatar {
   width: 36px; height: 36px; border-radius: 50%;
-  background: #EEF2FF;
-  color: var(--primary);
+  background: #EEF2FF; color: var(--primary);
   display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: .95rem; flex-shrink: 0;
 }
-
 .user-name { font-size: .85rem; font-weight: 600; color: var(--dark); }
 .user-plan { font-size: .7rem; color: var(--gray); }
-
 .logout-btn {
   display: flex; align-items: center; gap: 8px;
   color: var(--gray); font-size: .82rem;
@@ -91,21 +83,16 @@ a { text-decoration: none; }
 }
 .logout-btn:hover { background: #FEE2E2; color: var(--red); }
 
-/* Main content */
 .main { margin-left: var(--sidebar-w); padding: 40px; min-height: 100vh; }
 
-/* Card */
 .card {
   background: white; border-radius: 20px;
   padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,.06);
 }
-
-/* Page header */
 .page-header { margin-bottom: 28px; }
 .page-header h1 { font-size: 1.6rem; font-weight: 700; }
 .page-header p { color: var(--gray); margin-top: 4px; font-size: .9rem; }
 
-/* Search bar */
 .search-bar {
   width: 100%; padding: 13px 18px;
   border: 1.5px solid #E5E7EB; border-radius: 12px;
@@ -114,7 +101,6 @@ a { text-decoration: none; }
 }
 .search-bar:focus { outline: none; border-color: var(--primary); }
 
-/* Badges */
 .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
 .badge-live { background: #FEE2E2; color: var(--red); }
 .badge-soon { background: #FEF3C7; color: #D97706; }
@@ -122,7 +108,6 @@ a { text-decoration: none; }
 .badge-premium { background: #FEF9C3; color: #92400E; }
 .badge-basic { background: #EFF6FF; color: #1D4ED8; }
 
-/* Tag */
 .tag {
   display: inline-block; padding: 4px 12px; border-radius: 20px;
   font-size: .75rem; font-weight: 500;
