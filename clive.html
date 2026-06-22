@@ -1,225 +1,750 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>C-Live – CampusLearn</title>
-<link rel="stylesheet" href="css/global.css">
-<style>
-.live-banner {
-  background: linear-gradient(135deg, #C92B0C, #E03A1D);
-  border-radius: 24px; padding: 30px 32px; color: white;
-  margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center;
-}
-.live-pulse {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 10px; font-weight: 700; font-size: .9rem;
-}
-.dot { width: 12px; height: 12px; background: white; border-radius: 50%; animation: blink 1.4s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-.live-banner h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
-.live-banner p { opacity: .85; font-size: .86rem; }
-.join-live {
-  background: white; color: var(--red);
-  padding: 12px 26px; border-radius: 12px;
-  font-weight: 700; font-size: .88rem;
-  display: inline-block; margin-top: 16px; transition: opacity .2s;
-}
-.join-live:hover { opacity: .88; }
-.sec-head { display: flex; justify-content: space-between; align-items: center; margin: 28px 0 16px; }
-.sec-head h2 { font-size: 1rem; font-weight: 700; }
-.session-card {
-  background: white; border-radius: 18px; padding: 20px 22px;
-  box-shadow: 0 3px 16px rgba(0,0,0,.06);
-  display: flex; align-items: center; gap: 18px; margin-bottom: 12px;
-}
-.sc-time .t { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
-.sc-time .d { font-size: .72rem; color: var(--gray); }
-.sc-info { flex: 1; }
-.sc-info h3 { font-size: .9rem; font-weight: 600; margin-bottom: 3px; }
-.sc-info p { font-size: .78rem; color: var(--gray); }
-.sc-info .tags { margin-top: 7px; }
-.cd { text-align: center; min-width: 90px; }
-.cd .cd-val { font-size: 1.1rem; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
-.cd .cd-lbl { font-size: .68rem; color: var(--gray); }
-.rec-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-.rec-card {
-  background: white; border-radius: 16px; overflow: hidden;
-  box-shadow: 0 3px 14px rgba(0,0,0,.06); transition: transform .2s;
-}
-.rec-card:hover { transform: translateY(-3px); }
-.rc-thumb {
-  height: 120px; display: flex; align-items: center;
-  justify-content: center; font-size: 2.6rem;
-}
-.rc-body { padding: 14px; }
-.rc-body h4 { font-size: .86rem; font-weight: 700; margin-bottom: 4px; }
-.rc-body p { font-size: .74rem; color: var(--gray); }
-.rc-body a { display: inline-block; margin-top: 10px; font-size: .78rem; color: var(--primary); font-weight: 600; }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>C-Live – CampusLearn</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <style>
+        /* ----- global reset / utility ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f6f8fb;
+            display: flex;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        :root {
+            --primary: #0f3b5e;
+            --red: #c92b0c;
+            --gray: #64748b;
+            --border: #e9edf4;
+            --shadow: 0 3px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ----- sidebar ----- */
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 28px 18px 24px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            flex-shrink: 0;
+        }
+
+        .logo h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: var(--primary);
+        }
+        .logo span {
+            font-size: 0.7rem;
+            color: var(--gray);
+            display: block;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .menu {
+            margin: 28px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+        .menu a {
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.86rem;
+            font-weight: 500;
+            color: #334155;
+            text-decoration: none;
+            transition: background 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu a:hover {
+            background: #f1f5f9;
+        }
+        .menu a.active {
+            background: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .menu a .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 18px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .user-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .user-plan {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+        .logout-btn {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.15s;
+        }
+        .logout-btn:hover {
+            color: var(--red);
+        }
+
+        /* ----- main content ----- */
+        .main {
+            flex: 1;
+            padding: 32px 40px 60px;
+            max-width: 1100px;
+            overflow-y: auto;
+        }
+        .page-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .page-header p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* ----- live banner ----- */
+        .live-banner {
+            background: linear-gradient(135deg, #C92B0C, #E03A1D);
+            border-radius: 24px;
+            padding: 30px 32px;
+            color: white;
+            margin: 22px 0 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .live-banner .left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .live-pulse {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1.4s infinite;
+        }
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.25;
+            }
+        }
+        .live-banner h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .live-banner h2 img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px;
+        }
+        .live-banner .meta {
+            opacity: 0.85;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .join-live {
+            background: white;
+            color: var(--red);
+            padding: 12px 26px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            display: inline-block;
+            margin-top: 14px;
+            transition: opacity 0.2s;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .join-live:hover {
+            opacity: 0.88;
+        }
+        .live-banner .right {
+            text-align: right;
+            opacity: 0.85;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .live-banner .right .time {
+            font-size: 1.4rem;
+            font-weight: 800;
+            opacity: 1;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ----- section headers ----- */
+        .sec-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 32px 0 16px;
+        }
+        .sec-head h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sec-head a {
+            font-size: 0.82rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .sec-head a:hover {
+            text-decoration: underline;
+        }
+
+        /* ----- session card ----- */
+        .session-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 22px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .sc-time .t {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .sc-time .d {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+        .sc-info {
+            flex: 1;
+            min-width: 140px;
+        }
+        .sc-info h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sc-info h3 img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #f1f5f9;
+            padding: 3px;
+        }
+        .sc-info p {
+            font-size: 0.78rem;
+            color: var(--gray);
+        }
+        .sc-info .tags {
+            margin-top: 6px;
+        }
+        .tag {
+            background: #f1f5f9;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray);
+            display: inline-block;
+        }
+        .cd {
+            text-align: center;
+            min-width: 90px;
+        }
+        .cd .cd-val {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-variant-numeric: tabular-nums;
+        }
+        .cd .cd-lbl {
+            font-size: 0.68rem;
+            color: var(--gray);
+        }
+        .badge-soon {
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* ----- recordings grid ----- */
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        .rec-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        .rec-card:hover {
+            transform: translateY(-3px);
+        }
+        .rc-thumb {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            padding: 8px;
+        }
+        .rc-thumb img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+        .rc-body {
+            padding: 14px 16px 16px;
+        }
+        .rc-body h4 {
+            font-size: 0.86rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .rc-body p {
+            font-size: 0.74rem;
+            color: var(--gray);
+        }
+        .rc-body a {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .rc-body a:hover {
+            text-decoration: underline;
+        }
+
+        /* ----- responsive ----- */
+        @media (max-width: 840px) {
+            .rec-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .sidebar {
+                width: 200px;
+                padding: 20px 14px;
+            }
+            .main {
+                padding: 24px 20px 40px;
+            }
+        }
+        @media (max-width: 640px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                padding: 20px 16px 40px;
+            }
+            .live-banner {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 24px 20px;
+            }
+            .live-banner .right {
+                text-align: left;
+            }
+            .session-card {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .sc-time {
+                display: flex;
+                gap: 16px;
+                align-items: baseline;
+            }
+            .cd {
+                text-align: left;
+                min-width: unset;
+            }
+            .rec-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 420px) {
+            .rec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="sidebar">
-  <div class="logo"><h2>CampusLearn</h2><span>Platform Belajar Mahasiswa</span></div>
-  <nav class="menu">
-    <a href="dashboard.html">🏠 Home</a>
-    <a href="clive.html" class="active">🔴 C-Live</a>
-    <a href="ringkasin.html">📄 Ringkasin</a>
-    <a href="remindme.html">🎬 RemindMe</a>
-    <a href="studygroup.html">👥 Study Group</a>
-    <a href="profile.html">👤 Profil</a>
-  </nav>
-  <div class="sidebar-bottom">
-    <div class="user-info">
-      <div class="avatar" id="sb-avatar">R</div>
-      <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>CampusLearn</h2>
+            <span>Platform Belajar Mahasiswa</span>
+        </div>
+        <nav class="menu">
+            <a href="dashboard.html"><span class="nav-icon">🏠</span> Home</a>
+            <a href="clive.html" class="active"><span class="nav-icon">🔴</span> C-Live</a>
+            <a href="ringkasin.html"><span class="nav-icon">📄</span> Ringkasin</a>
+            <a href="remindme.html"><span class="nav-icon">🎬</span> RemindMe</a>
+            <a href="studygroup.html"><span class="nav-icon">👥</span> Study Group</a>
+            <a href="profile.html"><span class="nav-icon">👤</span> Profil</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="user-info">
+                <div class="avatar" id="sb-avatar">R</div>
+                <div>
+                    <div class="user-name" id="sb-name">-</div>
+                    <div class="user-plan" id="sb-plan">-</div>
+                </div>
+            </div>
+            <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+        </div>
     </div>
-    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
-  </div>
-</div>
 
-<div class="main">
-  <div class="page-header">
-    <h1>🔴 C-Live</h1>
-    <p>Sesi live teaching langsung dengan tutor</p>
-  </div>
+    <!-- ===== MAIN ===== -->
+    <div class="main">
 
-  <!-- Live Now -->
-  <div class="live-banner">
-    <div>
-      <div class="live-pulse"><div class="dot"></div> SEDANG LIVE SEKARANG</div>
-      <h2>Kalkulus 2 – Integral Lipat</h2>
-      <p>Tutor: Andi Mahardika &nbsp;•&nbsp; 48 peserta bergabung</p>
-      <a href="#" class="join-live" onclick="alert('Membuka ruang live...')">▶ Masuk Ruang Live</a>
-    </div>
-    <div style="text-align:right;opacity:.8;font-size:.85rem;">
-      Sudah berlangsung<br>
-      <span style="font-size:1.4rem;font-weight:800;opacity:1;" id="elapsed">00:34:12</span>
-    </div>
-  </div>
+        <!-- header -->
+        <div class="page-header">
+            <h1>🔴 C-Live</h1>
+            <p>Sesi live teaching langsung dengan tutor</p>
+        </div>
 
-  <!-- Upcoming -->
-  <div class="sec-head"><h2>📅 Jadwal Sesi Berikutnya</h2></div>
+        <!-- ===== LIVE NOW ===== -->
+        <div class="live-banner">
+            <div class="left">
+                <div class="live-pulse">
+                    <div class="dot"></div> SEDANG LIVE SEKARANG
+                </div>
+                <h2>
+                    <img src="assets/kalku2.png" alt="Kalkulus 2" />
+                    Kalkulus 2 – Integral Lipat
+                </h2>
+                <div class="meta">
+                    <span>Tutor: Andi Mahardika</span>
+                    <span>•</span>
+                    <span>48 peserta bergabung</span>
+                </div>
+                <a href="#" class="join-live" onclick="alert('Membuka ruang live...')">▶ Masuk Ruang Live</a>
+            </div>
+            <div class="right">
+                Sudah berlangsung<br />
+                <span class="time" id="elapsed">00:34:12</span>
+            </div>
+        </div>
 
-  <div class="session-card">
-    <div class="sc-time"><div class="t">14:00</div><div class="d">Hari ini</div></div>
-    <div class="sc-info">
-      <h3>Fisika Dasar – Gerak Harmonik Sederhana</h3>
-      <p>Tutor: Budi Santoso &nbsp;•&nbsp; 60 menit</p>
-      <div class="tags"><span class="tag">Fisika Dasar</span></div>
-    </div>
-    <div class="cd">
-      <div class="cd-lbl">Mulai dalam</div>
-      <div class="cd-val" id="cd1">--:--:--</div>
-    </div>
-  </div>
+        <!-- ===== UPCOMING SESSIONS ===== -->
+        <div class="sec-head">
+            <h2>📅 Jadwal Sesi Berikutnya</h2>
+        </div>
 
-  <div class="session-card">
-    <div class="sc-time"><div class="t">16:00</div><div class="d">Hari ini</div></div>
-    <div class="sc-info">
-      <h3>Pemrograman Dasar – Array dan Fungsi</h3>
-      <p>Tutor: Citra Dewi &nbsp;•&nbsp; 90 menit</p>
-      <div class="tags"><span class="tag">Pemrograman Dasar</span></div>
-    </div>
-    <div class="cd">
-      <div class="cd-lbl">Mulai dalam</div>
-      <div class="cd-val" id="cd2">--:--:--</div>
-    </div>
-  </div>
+        <!-- Session 1 -->
+        <div class="session-card">
+            <div class="sc-time">
+                <div class="t">14:00</div>
+                <div class="d">Hari ini</div>
+            </div>
+            <div class="sc-info">
+                <h3>
+                    <img src="assets/fisika1.png" alt="Fisika Dasar" />
+                    Fisika Dasar – Gerak Harmonik Sederhana
+                </h3>
+                <p>Tutor: Budi Santoso &nbsp;•&nbsp; 60 menit</p>
+                <div class="tags"><span class="tag">Fisika Dasar</span></div>
+            </div>
+            <div class="cd">
+                <div class="cd-lbl">Mulai dalam</div>
+                <div class="cd-val" id="cd1">--:--:--</div>
+            </div>
+        </div>
 
-  <div class="session-card">
-    <div class="sc-time"><div class="t">09:00</div><div class="d">Besok</div></div>
-    <div class="sc-info">
-      <h3>Kalkulus Lanjutan – Deret Taylor</h3>
-      <p>Tutor: Dian Kusuma &nbsp;•&nbsp; 75 menit</p>
-      <div class="tags"><span class="tag">Kalkulus Lanjutan</span></div>
-    </div>
-    <div><span class="badge badge-soon">Besok</span></div>
-  </div>
+        <!-- Session 2 -->
+        <div class="session-card">
+            <div class="sc-time">
+                <div class="t">16:00</div>
+                <div class="d">Hari ini</div>
+            </div>
+            <div class="sc-info">
+                <h3>
+                    <img src="assets/data.png" alt="Pemrograman Dasar" />
+                    Pemrograman Dasar – Array dan Fungsi
+                </h3>
+                <p>Tutor: Citra Dewi &nbsp;•&nbsp; 90 menit</p>
+                <div class="tags"><span class="tag">Pemrograman Dasar</span></div>
+            </div>
+            <div class="cd">
+                <div class="cd-lbl">Mulai dalam</div>
+                <div class="cd-val" id="cd2">--:--:--</div>
+            </div>
+        </div>
 
-  <div class="session-card">
-    <div class="sc-time"><div class="t">13:00</div><div class="d">Besok</div></div>
-    <div class="sc-info">
-      <h3>Kimia Dasar – Stoikiometri Lanjutan</h3>
-      <p>Tutor: Eka Putri &nbsp;•&nbsp; 60 menit</p>
-      <div class="tags"><span class="tag">Kimia Dasar</span></div>
-    </div>
-    <div><span class="badge badge-soon">Besok</span></div>
-  </div>
+        <!-- Session 3 -->
+        <div class="session-card">
+            <div class="sc-time">
+                <div class="t">09:00</div>
+                <div class="d">Besok</div>
+            </div>
+            <div class="sc-info">
+                <h3>
+                    <img src="assets/kalku2.png" alt="Kalkulus Lanjutan" />
+                    Kalkulus Lanjutan – Deret Taylor
+                </h3>
+                <p>Tutor: Dian Kusuma &nbsp;•&nbsp; 75 menit</p>
+                <div class="tags"><span class="tag">Kalkulus Lanjutan</span></div>
+            </div>
+            <div><span class="badge-soon">Besok</span></div>
+        </div>
 
-  <!-- Recordings -->
-  <div class="sec-head" style="margin-top:36px;">
-    <h2>🎬 Rekaman Sesi Sebelumnya</h2>
-    <a href="remindme.html" style="font-size:.82rem;color:var(--primary);font-weight:500;">Lihat Semua →</a>
-  </div>
-  <div class="rec-grid">
-    <div class="rec-card">
-      <div class="rc-thumb" style="background:#EEF2FF;">
-        <img src="assets/kalku.png" style="width:100px;height:100px;object-fit:contain;">
-      </div>
-      <div class="rc-body"><h4>Limit Fungsi</h4><p>Kalkulus 1 • Andi • 1j 20m</p><a href="remindme.html">▶ Tonton</a></div>
-    </div>
-    <div class="rec-card">
-      <div class="rc-thumb" style="background:#FFF7ED;">⚡</div>
-      <div class="rc-body"><h4>Gerak Lurus Beraturan</h4><p>Fisika Dasar • Budi • 55m</p><a href="remindme.html">▶ Tonton</a></div>
-    </div>
-    <div class="rec-card">
-      <div class="rc-thumb" style="background:#F0FDF4;">🧪</div>
-      <div class="rc-body"><h4>Stoikiometri Dasar</h4><p>Kimia Dasar • Eka • 1j 05m</p><a href="remindme.html">▶ Tonton</a></div>
-    </div>
-    <div class="rec-card">
-      <div class="rc-thumb" style="background:#F5F3FF;">💻</div>
-      <div class="rc-body"><h4>Pengenalan Python</h4><p>Progdas • Citra • 1j 20m</p><a href="remindme.html">▶ Tonton</a></div>
-    </div>
-    <div class="rec-card">
-      <div class="rc-thumb" style="background:#FFF7ED;">📊</div>
-      <div class="rc-body"><h4>Desain Penelitian</h4><p>Metpen • Dian • 70m</p><a href="remindme.html">▶ Tonton</a></div>
-    </div>
-    <div class="rec-card">
-      <div class="rc-thumb" style="background:#F0FDF4;">🌿</div>
-      <div class="rc-body"><h4>Sel dan Organel</h4><p>Biologi • Fitri • 60m</p><a href="remindme.html">▶ Tonton</a></div>
-    </div>
-  </div>
-</div>
+        <!-- Session 4 -->
+        <div class="session-card">
+            <div class="sc-time">
+                <div class="t">13:00</div>
+                <div class="d">Besok</div>
+            </div>
+            <div class="sc-info">
+                <h3>
+                    <img src="assets/kimia1.png" alt="Kimia Dasar" />
+                    Kimia Dasar – Stoikiometri Lanjutan
+                </h3>
+                <p>Tutor: Eka Putri &nbsp;•&nbsp; 60 menit</p>
+                <div class="tags"><span class="tag">Kimia Dasar</span></div>
+            </div>
+            <div><span class="badge-soon">Besok</span></div>
+        </div>
 
-<script>
-const user = JSON.parse(localStorage.getItem('clUser') || 'null');
-if (!user) window.location.href = 'login.html';
-else {
-  const first = user.name.split(' ')[0];
-  document.getElementById('sb-name').textContent = first;
-  document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
-  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
-}
-function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
+        <!-- ===== RECORDINGS ===== -->
+        <div class="sec-head" style="margin-top: 40px;">
+            <h2>🎬 Rekaman Sesi Sebelumnya</h2>
+            <a href="remindme.html">Lihat Semua →</a>
+        </div>
 
-// Countdown ke jam tertentu hari ini
-function startCountdown(h, m, elId) {
-  const el = document.getElementById(elId);
-  setInterval(() => {
-    const now = new Date();
-    const target = new Date(); target.setHours(h, m, 0, 0);
-    if (target <= now) { el.textContent = 'Sedang berlangsung'; el.style.color = 'var(--red)'; return; }
-    const d = target - now;
-    const hh = Math.floor(d / 3600000);
-    const mm = Math.floor((d % 3600000) / 60000);
-    const ss = Math.floor((d % 60000) / 1000);
-    el.textContent = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
-  }, 1000);
-}
-startCountdown(14, 0, 'cd1');
-startCountdown(16, 0, 'cd2');
+        <div class="rec-grid">
 
-// Elapsed timer untuk live yang sedang berlangsung (fake, mulai dari 34:12)
-let elapsedSec = 34 * 60 + 12;
-setInterval(() => {
-  elapsedSec++;
-  const m = Math.floor(elapsedSec / 60);
-  const s = elapsedSec % 60;
-  document.getElementById('elapsed').textContent =
-    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}, 1000);
-</script>
+            <!-- 1. Kalkulus 1 – Limit Fungsi -->
+            <div class="rec-card">
+                <div class="rc-thumb">
+                    <img src="assets/kalku.png" alt="Kalkulus" />
+                </div>
+                <div class="rc-body">
+                    <h4>Limit Fungsi</h4>
+                    <p>Kalkulus 1 • Andi • 1j 20m</p>
+                    <a href="remindme.html">▶ Tonton</a>
+                </div>
+            </div>
+
+            <!-- 2. Fisika Dasar – Gerak Lurus Beraturan -->
+            <div class="rec-card">
+                <div class="rc-thumb">
+                    <img src="assets/fisika1.png" alt="Fisika Dasar" />
+                </div>
+                <div class="rc-body">
+                    <h4>Gerak Lurus Beraturan</h4>
+                    <p>Fisika Dasar • Budi • 55m</p>
+                    <a href="remindme.html">▶ Tonton</a>
+                </div>
+            </div>
+
+            <!-- 3. Kimia Dasar – Stoikiometri Dasar -->
+            <div class="rec-card">
+                <div class="rc-thumb">
+                    <img src="assets/kimia1.png" alt="Kimia Dasar" />
+                </div>
+                <div class="rc-body">
+                    <h4>Stoikiometri Dasar</h4>
+                    <p>Kimia Dasar • Eka • 1j 05m</p>
+                    <a href="remindme.html">▶ Tonton</a>
+                </div>
+            </div>
+
+            <!-- 4. Pemrograman Dasar – Pengenalan Python -->
+            <div class="rec-card">
+                <div class="rc-thumb">
+                    <img src="assets/data.png" alt="Pemrograman Dasar" />
+                </div>
+                <div class="rc-body">
+                    <h4>Pengenalan Python</h4>
+                    <p>Progdas • Citra • 1j 20m</p>
+                    <a href="remindme.html">▶ Tonton</a>
+                </div>
+            </div>
+
+            <!-- 5. Metpen – Desain Penelitian -->
+            <div class="rec-card">
+                <div class="rc-thumb">
+                    <img src="assets/metopen.png" alt="Metodologi Penelitian" />
+                </div>
+                <div class="rc-body">
+                    <h4>Desain Penelitian</h4>
+                    <p>Metpen • Dian • 70m</p>
+                    <a href="remindme.html">▶ Tonton</a>
+                </div>
+            </div>
+
+            <!-- 6. Biologi – Sel dan Organel -->
+            <div class="rec-card">
+                <div class="rc-thumb">
+                    <img src="assets/bio1.png" alt="Biologi" />
+                </div>
+                <div class="rc-body">
+                    <h4>Sel dan Organel</h4>
+                    <p>Biologi • Fitri • 60m</p>
+                    <a href="remindme.html">▶ Tonton</a>
+                </div>
+            </div>
+
+        </div>
+        <!-- end rec-grid -->
+
+    </div>
+    <!-- end main -->
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // ----- user from localStorage -----
+        const user = JSON.parse(localStorage.getItem('clUser') || 'null');
+        if (!user) {
+            window.location.href = 'login.html';
+        } else {
+            const first = user.name.split(' ')[0];
+            document.getElementById('sb-name').textContent = first;
+            document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
+            document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+        }
+
+        function logout() {
+            localStorage.removeItem('clUser');
+            window.location.href = 'login.html';
+        }
+
+        // ----- countdown untuk sesi hari ini (14:00 & 16:00) -----
+        function startCountdown(h, m, elId) {
+            const el = document.getElementById(elId);
+            if (!el) return;
+            setInterval(() => {
+                const now = new Date();
+                const target = new Date();
+                target.setHours(h, m, 0, 0);
+
+                if (target <= now) {
+                    el.textContent = 'Sedang berlangsung';
+                    el.style.color = 'var(--red)';
+                    return;
+                }
+                const d = target - now;
+                const hh = Math.floor(d / 3600000);
+                const mm = Math.floor((d % 3600000) / 60000);
+                const ss = Math.floor((d % 60000) / 1000);
+                el.textContent =
+                    `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+                el.style.color = 'var(--primary)';
+            }, 1000);
+        }
+        startCountdown(14, 0, 'cd1');
+        startCountdown(16, 0, 'cd2');
+
+        // ----- elapsed timer untuk live yang sedang berlangsung (mulai 34:12) -----
+        let elapsedSec = 34 * 60 + 12;
+        setInterval(() => {
+            elapsedSec++;
+            const m = Math.floor(elapsedSec / 60);
+            const s = elapsedSec % 60;
+            const el = document.getElementById('elapsed');
+            if (el) {
+                el.textContent =
+                    `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            }
+        }, 1000);
+    </script>
+
 </body>
 </html>
