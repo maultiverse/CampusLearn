@@ -44,6 +44,10 @@ input:focus { outline: none; border-color: var(--primary); }
     <input type="text" id="name" placeholder="Nama kamu">
   </div>
   <div class="input-group">
+    <label>Nama Panggilan</label>
+    <input type="text" id="nickname" placeholder="Contoh: Maul">
+  </div>
+  <div class="input-group">
     <label>Email</label>
     <input type="email" id="email" placeholder="email@example.com">
   </div>
@@ -99,13 +103,14 @@ function setPlan(plan) {
 }
 
 function doSignup() {
-  const name  = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const nim   = document.getElementById('nim').value.trim();
-  const prodi = document.getElementById('prodi').value.trim();
-  const pass  = document.getElementById('password').value;
-  const pass2 = document.getElementById('password2').value;
-  const errEl = document.getElementById('err');
+  const name     = document.getElementById('name').value.trim();
+  const nickname = document.getElementById('nickname').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const nim      = document.getElementById('nim').value.trim();
+  const prodi    = document.getElementById('prodi').value.trim();
+  const pass     = document.getElementById('password').value;
+  const pass2    = document.getElementById('password2').value;
+  const errEl    = document.getElementById('err');
 
   const showErr = msg => { errEl.textContent = msg; errEl.style.display = 'block'; };
 
@@ -116,7 +121,7 @@ function doSignup() {
   const accounts = JSON.parse(localStorage.getItem('clAccounts') || '[]');
   if (accounts.find(a => a.email === email)) return showErr('Email sudah terdaftar!');
 
-  const user = { name, email, nim, prodi, password: pass, plan: chosenPlan };
+  const user = { name, nickname: nickname || name.split(' ')[0], email, nim, prodi, password: pass, plan: chosenPlan };
   accounts.push(user);
   localStorage.setItem('clAccounts', JSON.stringify(accounts));
   localStorage.setItem('clUser', JSON.stringify(user));
