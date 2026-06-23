@@ -25,16 +25,11 @@
 .join-btn.joined { background: var(--primary); color: white; }
 .disc-link { font-size: .76rem; color: var(--primary); font-weight: 600; cursor: pointer; }
 .disc-link:hover { text-decoration: underline; }
-
-/* Discussion view */
 #disc-panel { display: none; }
 .back { display: inline-flex; align-items: center; gap: 8px; color: var(--gray); font-size: .85rem; cursor: pointer; margin-bottom: 20px; font-weight: 500; }
 .back:hover { color: var(--primary); }
 .disc-head { background: white; border-radius: 18px; padding: 20px 22px; box-shadow: 0 3px 14px rgba(0,0,0,.06); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
-.post {
-  background: white; border-radius: 16px; padding: 18px 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.05); margin-bottom: 12px;
-}
+.post { background: white; border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 10px rgba(0,0,0,.05); margin-bottom: 12px; }
 .post-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .p-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
 .p-author { font-size: .84rem; font-weight: 600; }
@@ -54,14 +49,14 @@ textarea:focus { outline: none; border-color: var(--primary); }
 <div class="sidebar">
   <div class="logo">
     <img src="assets/logo.png" style="width:140px;object-fit:contain;display:block;margin-bottom:4px;">
-    <span style="display:block;font-size:.72rem;opacity:.65;">Platform Belajar Mahasiswa</span>
+    <span style="display:block;font-size:.72rem;color:var(--gray);">Platform Belajar Mahasiswa</span>
   </div>
   <nav class="menu">
     <a href="dashboard.html">Home</a>
-    <a href="clive.html" class="active"> C-Live</a>
-    <a href="ringkasin.html"> Ringkasin</a>
+    <a href="clive.html">C-Live</a>
+    <a href="ringkasin.html">Ringkasin</a>
     <a href="remindme.html">RemindMe</a>
-    <a href="studygroup.html">Study Group</a>
+    <a href="studygroup.html" class="active">Study Group</a>
     <a href="profile.html">Profil</a>
   </nav>
   <div class="sidebar-bottom">
@@ -69,32 +64,27 @@ textarea:focus { outline: none; border-color: var(--primary); }
       <div class="avatar" id="sb-avatar">R</div>
       <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
     </div>
-    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+    <div class="logout-btn" onclick="logout()">Keluar</div>
   </div>
 </div>
 
 <div class="main">
-  <!-- List panel -->
   <div id="list-panel">
     <div class="top-bar">
       <div class="page-header" style="margin-bottom:0;">
-        <h1>👥 Study Group</h1>
+        <h1>Study Group</h1>
         <p>Komunitas belajar per mata kuliah</p>
       </div>
       <button onclick="createGroup()" class="btn-primary" style="border:none;cursor:pointer;font-size:.84rem;padding:12px 22px;">+ Buat Grup</button>
     </div>
-
-    <input type="text" class="search-bar" placeholder="🔍 Cari grup..." oninput="renderGroups(this.value)">
-
+    <input type="text" class="search-bar" placeholder="Cari grup..." oninput="renderGroups(this.value)">
     <div class="tab-row">
       <button class="tab active" onclick="setTab('semua',this)">Semua Grup</button>
       <button class="tab" onclick="setTab('saya',this)">Grup Saya</button>
     </div>
-
     <div id="groups-list"></div>
   </div>
 
-  <!-- Discussion panel -->
   <div id="disc-panel">
     <div class="back" onclick="backToList()">← Kembali ke Daftar Grup</div>
     <div class="disc-head" id="disc-head"></div>
@@ -116,37 +106,37 @@ else {
   const first = user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
-  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
 }
 function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 
 const defaultGroups = [
-  { id:1, icon:'📐', name:'Pejuang Kalkulus', matkul:'Kalkulus 1 & 2', members:120, active:true, lastPost:'5 menit lalu',
+  { id:1, icon:'𝞹', name:'Pejuang Kalkulus', matkul:'Kalkulus 1 & 2', members:120, active:true, lastPost:'5 menit lalu',
     posts:[
-      { author:'Sari', time:'10 menit lalu', text:'Ada yang bisa bantu soal integral substitusi nomor 5? Aku bingung di bagian dx-nya 🙏' },
-      { author:'Reza', time:'8 menit lalu', text:'Di soal itu substitusi u = x² + 1, jadi du = 2x dx. Tinggal ganti ke integralnya!' },
+      { author:'Maul Calon Orang Kaya', time:'10 menit lalu', text:'Ada yang bisa bantu soal integral substitusi nomor 5? Aku bingung di bagian dx-nya 🙏' },
+      { author:'Dhafa Ambiss', time:'8 menit lalu', text:'Di soal itu substitusi u = x² + 1, jadi du = 2x dx. Tinggal ganti ke integralnya!' },
     ]
   },
-  { id:2, icon:'⚡', name:'Fisika Bareng', matkul:'Fisika Dasar', members:98, active:true, lastPost:'22 menit lalu',
+  { id:2, icon:'E=mc²', name:'Fisika Einstein', matkul:'Fisika Dasar', members:98, active:true, lastPost:'22 menit lalu',
     posts:[
-      { author:'Hendra', time:'1 jam lalu', text:'Guys tutor Budi bilang besok ada kuis tentang gerak harmonik. Yang sudah baca, share catatan dong!' },
-      { author:'Maya', time:'45 menit lalu', text:'Udah aku upload di drive, cek link di grup WA ya 😊' },
+      { author:'Iqlima Lucukk', time:'1 jam lalu', text:'Guys tutor Budi bilang besok ada kuis tentang gerak harmonik. Yang sudah baca, share catatan dong!' },
+      { author:'Azzahra baikk', time:'45 menit lalu', text:'Udah aku upload di drive, cek link di grup WA ya 😊' },
     ]
   },
-  { id:3, icon:'💻', name:'Tim Progdas', matkul:'Pemrograman Dasar', members:75, active:false, lastPost:'2 jam lalu',
+  { id:3, icon:'💻🗁', name:'Pecinta Data', matkul:'Pemrograman Dasar', members:75, active:false, lastPost:'2 jam lalu',
     posts:[
-      { author:'Fariz', time:'2 jam lalu', text:'Error terus: "NameError: name x is not defined" — ada yang tau kenapa?' },
-      { author:'Nisa', time:'1.5 jam lalu', text:'Itu berarti kamu belum deklarasi variabel x. Tambahin x = 0 sebelum dipakai!' },
+      { author:'Cahya Ilahi', time:'2 jam lalu', text:'Error terus: "NameError: name x is not defined" — ada yang tau kenapa?' },
+      { author:'Rahmi Rizz', time:'1.5 jam lalu', text:'Itu berarti kamu belum deklarasi variabel x. Tambahin x = 0 sebelum dipakai!' },
     ]
   },
-  { id:4, icon:'🧪', name:'Kimia Mania', matkul:'Kimia Dasar', members:60, active:true, lastPost:'1 jam lalu',
-    posts:[{ author:'Putri', time:'1 jam lalu', text:'Stoikiometri masih bingung 😅 Ada yang mau buat sesi belajar bareng minggu ini?' }]
+  { id:4, icon:'🧪 𒉭 ⋆', name:'Kimia Mania', matkul:'Kimia Dasar', members:60, active:true, lastPost:'1 jam lalu',
+    posts:[{ author:'Saya Bingung', time:'1 jam lalu', text:'Stoikiometri masih bingung 😅 Ada yang mau buat sesi belajar bareng minggu ini?' }]
   },
-  { id:5, icon:'🌿', name:'Bio Squad', matkul:'Biologi', members:55, active:true, lastPost:'30 menit lalu',
+  { id:5, icon:'🔬🧬🦠', name:'Bio Squad', matkul:'Biologi', members:55, active:true, lastPost:'30 menit lalu',
     posts:[{ author:'Ayu', time:'30 menit lalu', text:'Yang masih bingung transkripsi vs translasi, aku mau buat thread penjelasan besok!' }]
   },
-  { id:6, icon:'📊', name:'Excel Expert', matkul:'Excel Dasar', members:45, active:false, lastPost:'3 jam lalu',
-    posts:[{ author:'Gilang', time:'3 jam lalu', text:'Tips VLOOKUP: kalau pakai match type FALSE, kolom referensi tidak perlu diurutkan!' }]
+  { id:6, icon:'📊', name:'Future Analyst', matkul:'Excel Dasar', members:45, active:false, lastPost:'3 jam lalu',
+    posts:[{ author:'calon CEO', time:'3 jam lalu', text:'Tips VLOOKUP: kalau pakai match type FALSE, kolom referensi tidak perlu diurutkan!' }]
   },
 ];
 
@@ -166,12 +156,10 @@ function renderGroups(q = '') {
   let list = groups;
   if (activeTab === 'saya') list = groups.filter(g => joined.includes(g.id));
   if (q) list = list.filter(g => g.name.toLowerCase().includes(q.toLowerCase()) || g.matkul.toLowerCase().includes(q.toLowerCase()));
-
   if (!list.length) {
     document.getElementById('groups-list').innerHTML = '<div style="text-align:center;color:var(--gray);padding:40px 0;">Tidak ada grup ditemukan</div>';
     return;
   }
-
   document.getElementById('groups-list').innerHTML = list.map(g => {
     const isJoined = joined.includes(g.id);
     return `
@@ -189,7 +177,7 @@ function renderGroups(q = '') {
           <button class="join-btn ${isJoined?'joined':''}" onclick="toggleJoin(${g.id},this)">
             ${isJoined?'✓ Bergabung':'+ Gabung'}
           </button>
-          <span class="disc-link" onclick="openDisc(${g.id})">💬 Buka Diskusi →</span>
+          <span class="disc-link" onclick="openDisc(${g.id})">+ Buka Diskusi →</span>
         </div>
       </div>
     `;
@@ -208,7 +196,6 @@ function openDisc(id) {
   currentGroup = groups.find(g => g.id === id);
   document.getElementById('list-panel').style.display = 'none';
   document.getElementById('disc-panel').style.display = 'block';
-
   document.getElementById('disc-head').innerHTML = `
     <div style="font-size:1.8rem;">${currentGroup.icon}</div>
     <div>
@@ -228,10 +215,7 @@ function renderPosts() {
         <div><div class="p-author">${p.author}</div><div class="p-time">${p.time}</div></div>
       </div>
       <div class="p-text">${p.text}</div>
-      <div class="p-acts">
-        <span class="p-act">👍 Like</span>
-        <span class="p-act">💬 Balas</span>
-      </div>
+      <div class="p-acts"><span class="p-act">Like</span><span class="p-act">💬 Balas</span></div>
     </div>
   `).join('');
 }
@@ -245,7 +229,6 @@ function submitPost() {
   localStorage.setItem(key, JSON.stringify(posts));
   document.getElementById('post-text').value = '';
   renderPosts();
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
 function backToList() {
@@ -258,7 +241,7 @@ function createGroup() {
   if (!name || !name.trim()) return;
   const matkul = prompt('Untuk mata kuliah apa?');
   if (!matkul || !matkul.trim()) return;
-  const g = { id: Date.now(), icon:'👥', name:name.trim(), matkul:matkul.trim(), members:1, active:true, lastPost:'Baru dibuat', posts:[] };
+  const g = { id: Date.now(), icon:'', name:name.trim(), matkul:matkul.trim(), members:1, active:true, lastPost:'Baru dibuat', posts:[] };
   groups.unshift(g);
   joined.push(g.id);
   localStorage.setItem('sg_groups', JSON.stringify(groups));
