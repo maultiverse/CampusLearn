@@ -34,7 +34,7 @@ a { text-decoration: none; }
 .sidebar {
   position: fixed; left: 0; top: 0;
   width: var(--sidebar-w); height: 100vh;
-  background: #ffffff;
+  background: #fff8e5;
   padding: 30px 20px;
   color: var(--dark);
   display: flex; flex-direction: column;
