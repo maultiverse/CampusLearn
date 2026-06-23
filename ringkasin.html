@@ -96,7 +96,7 @@
 const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
-  const first = user.name.split(' ')[0];
+  const first = user.nickname || user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
   document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
