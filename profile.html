@@ -13,12 +13,10 @@
 }
 .big-avatar {
   width: 88px; height: 88px; border-radius: 50%;
-  background: var(--primary); color: white;
+  background: #EEF2FF; color: var(--primary);
   display: flex; align-items: center; justify-content: center;
   font-size: 2.2rem; font-weight: 700; flex-shrink: 0;
-  overflow: hidden;
 }
-.big-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .prof-name { font-size: 1.35rem; font-weight: 800; }
 .prof-sub { color: var(--gray); font-size: .85rem; margin-top: 4px; }
 .plan-chip { display: inline-block; margin-top: 12px; padding: 6px 16px; border-radius: 20px; font-size: .78rem; font-weight: 600; background: #FEF9C3; color: #92400E; }
@@ -41,28 +39,28 @@
 <div class="sidebar">
   <div class="logo">
     <img src="assets/logo.png" style="width:140px;object-fit:contain;display:block;margin-bottom:4px;">
-    <span style="display:block;font-size:.72rem;opacity:.65;">Platform Belajar Mahasiswa</span>
+    <span style="display:block;font-size:.72rem;color:var(--gray);">Platform Belajar Mahasiswa</span>
   </div>
   <nav class="menu">
     <a href="dashboard.html">Home</a>
-    <a href="clive.html" class="active"> C-Live</a>
-    <a href="ringkasin.html"> Ringkasin</a>
+    <a href="clive.html">C-Live</a>
+    <a href="ringkasin.html">Ringkasin</a>
     <a href="remindme.html">RemindMe</a>
     <a href="studygroup.html">Study Group</a>
-    <a href="profile.html">Profil</a>
+    <a href="profile.html" class="active">Profil</a>
   </nav>
   <div class="sidebar-bottom">
     <div class="user-info">
       <div class="avatar" id="sb-avatar">R</div>
       <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
     </div>
-    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+    <div class="logout-btn" onclick="logout()">Keluar</div>
   </div>
 </div>
 
 <div class="main">
   <div class="page-header">
-    <h1>👤 Profil Saya</h1>
+    <h1>Profil Saya</h1>
     <p>Informasi akun dan aktivitas belajar</p>
   </div>
 
@@ -71,10 +69,10 @@
     <div>
       <div class="prof-name" id="p-name">-</div>
       <div class="prof-sub" id="p-sub">-</div>
-      <div class="plan-chip" id="p-chip">⭐ Premium</div>
+      <div class="plan-chip" id="p-chip">✪ Premium</div>
     </div>
     <div style="margin-left:auto;">
-      <a href="index.html#harga" class="btn-outline" style="font-size:.82rem;padding:10px 20px;">🔄 Ganti Paket</a>
+      <a href="index.html#harga" class="btn-outline" style="font-size:.82rem;padding:10px 20px;">Ganti Paket</a>
     </div>
   </div>
 
@@ -86,7 +84,7 @@
 
   <div class="info-grid">
     <div class="info-card">
-      <h3>📋 Informasi Akun</h3>
+      <h3>Informasi Akun</h3>
       <div class="info-row"><span class="lbl">Nama</span><span id="i-name">-</span></div>
       <div class="info-row"><span class="lbl">Email</span><span id="i-email">-</span></div>
       <div class="info-row"><span class="lbl">NIM</span><span id="i-nim">-</span></div>
@@ -94,7 +92,7 @@
       <div class="info-row"><span class="lbl">Paket</span><span id="i-plan">-</span></div>
     </div>
     <div class="info-card">
-      <h3>📈 Aktivitas Belajar</h3>
+      <h3>Aktivitas </h3>
       <div class="info-row"><span class="lbl">Kelas Diikuti</span><span>45</span></div>
       <div class="info-row"><span class="lbl">Video Ditonton</span><span>32</span></div>
       <div class="info-row"><span class="lbl">Rangkuman Dibaca</span><span>18</span></div>
@@ -109,7 +107,7 @@
       <div style="font-size:.8rem;color:var(--gray);margin-top:2px;">Kamu akan diarahkan ke halaman login</div>
     </div>
     <button onclick="logout()" style="background:var(--red);color:white;border:none;padding:11px 22px;border-radius:12px;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;font-size:.84rem;">
-      🚪 Keluar
+      Keluar
     </button>
   </div>
 </div>
@@ -121,20 +119,18 @@ else {
   const first = user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
-  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
   document.getElementById('big-av').textContent = first[0].toUpperCase();
   document.getElementById('p-name').textContent = user.name;
   document.getElementById('p-sub').textContent = `NIM: ${user.nim||'-'} • ${user.prodi||'-'}`;
-
   const chip = document.getElementById('p-chip');
-  if (user.plan === 'premium') { chip.textContent = '⭐ Paket Premium'; }
-  else { chip.textContent = '🔵 Paket Basic'; chip.classList.add('basic'); }
-
+  if (user.plan === 'premium') { chip.textContent = 'Paket Premium'; }
+  else { chip.textContent = 'Paket Basic'; chip.classList.add('basic'); }
   document.getElementById('i-name').textContent = user.name;
   document.getElementById('i-email').textContent = user.email;
   document.getElementById('i-nim').textContent = user.nim || '-';
   document.getElementById('i-prodi').textContent = user.prodi || '-';
-  document.getElementById('i-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  document.getElementById('i-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
 }
 function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 </script>
