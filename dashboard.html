@@ -150,7 +150,7 @@
         <a href="remindme.html" style="color:var(--primary);font-size:.8rem;font-weight:600;margin-left:auto;">▶</a>
       </div>
       <div class="rec-row">
-        <div class="rec-thumb"><img src="assets/fisika1.png"></div>
+        <div class="rec-thumb"><img src="assets/fisika 1.png"></div>
         <div class="rec-info">
           <h3>Gerak Lurus – Fisika Dasar</h3>
           <p>Budi Santoso • 55m • 3 hari lalu</p>
@@ -181,8 +181,8 @@
 const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
-  const first = user.name.split(' ')[0];
-  document.getElementById('greet').textContent = `Halo, ${third}`;
+  const first = user.nickname || user.name.split(' ')[0];
+  document.getElementById('greet').textContent = `Halo, ${first}`;
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
   const planLabel = user.plan === 'premium' ? 'Premium' : 'Basic';
