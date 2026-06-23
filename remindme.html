@@ -90,7 +90,7 @@
 const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
-  const first = user.name.split(' ')[0];
+  const first = user.nickname || user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
   document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
@@ -102,8 +102,8 @@ const videos = [
   { icon:'<img src="assets/kalku.png">', bg:'#EEF2FF', title:'Turunan & Aturan Rantai', matkul:'Kalkulus 1', tutor:'Andi Mahardika', dur:'1j 05m', date:'5 hari lalu', premium:false },
   { icon:'<img src="assets/kalku2.png">', bg:'#EEF2FF', title:'Integral Parsial', matkul:'Kalkulus 2', tutor:'Andi Mahardika', dur:'1j 30m', date:'1 minggu lalu', premium:true },
   { icon:'<img src="assets/kalku2.png">', bg:'#EEF2FF', title:'Deret Taylor', matkul:'Kalkulus Lanjutan', tutor:'Dian Kusuma', dur:'1j 30m', date:'2 minggu lalu', premium:true },
-  { icon:'<img src="assets/fisika 1.png">', bg:'#FFF7ED', title:'Gerak Lurus Beraturan', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'55m', date:'3 hari lalu', premium:false },
-  { icon:'<img src="assets/fisika 1.png">', bg:'#FFF7ED', title:'Hukum Newton', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'1j 10m', date:'1 minggu lalu', premium:true },
+  { icon:'<img src="assets/fisika 1.png">', bg:'#fff2cc', title:'Gerak Lurus Beraturan', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'55m', date:'3 hari lalu', premium:false },
+  { icon:'<img src="assets/fisika 1.png">', bg:'#fff2cc', title:'Hukum Newton', matkul:'Fisika Dasar', tutor:'Budi Santoso', dur:'1j 10m', date:'1 minggu lalu', premium:true },
   { icon:'<img src="assets/kimia1.png">', bg:'#F0FDF4', title:'Stoikiometri Dasar', matkul:'Kimia Dasar', tutor:'Eka Putri', dur:'1j 05m', date:'4 hari lalu', premium:false },
   { icon:'<img src="assets/bio1.png">', bg:'#F0FDF4', title:'Sel & Organel', matkul:'Biologi', tutor:'Fitri Amelia', dur:'60m', date:'6 hari lalu', premium:true },
   { icon:'<img src="assets/data.png">', bg:'#F5F3FF', title:'Pengenalan Python', matkul:'Pemrograman Dasar', tutor:'Citra Dewi', dur:'1j 20m', date:'2 hari lalu', premium:false },
