@@ -103,7 +103,7 @@ textarea:focus { outline: none; border-color: var(--primary); }
 const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
-  const first = user.name.split(' ')[0];
+  const first = user.nickname || user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
   document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
@@ -117,7 +117,7 @@ const defaultGroups = [
       { author:'Dhafa Ambiss', time:'8 menit lalu', text:'Di soal itu substitusi u = x² + 1, jadi du = 2x dx. Tinggal ganti ke integralnya!' },
     ]
   },
-  { id:2, icon:'E=mc²', name:'Fisika Einstein', matkul:'Fisika Dasar', members:98, active:true, lastPost:'22 menit lalu',
+  { id:2, icon:'mc²', name:'Fisika Einstein', matkul:'Fisika Dasar', members:98, active:true, lastPost:'22 menit lalu',
     posts:[
       { author:'Iqlima Lucukk', time:'1 jam lalu', text:'Guys tutor Budi bilang besok ada kuis tentang gerak harmonik. Yang sudah baca, share catatan dong!' },
       { author:'Azzahra baikk', time:'45 menit lalu', text:'Udah aku upload di drive, cek link di grup WA ya 😊' },
@@ -129,10 +129,10 @@ const defaultGroups = [
       { author:'Rahmi Rizz', time:'1.5 jam lalu', text:'Itu berarti kamu belum deklarasi variabel x. Tambahin x = 0 sebelum dipakai!' },
     ]
   },
-  { id:4, icon:'🧪 𒉭 ⋆', name:'Kimia Mania', matkul:'Kimia Dasar', members:60, active:true, lastPost:'1 jam lalu',
+  { id:4, icon:'🧪', name:'Kimia Mania', matkul:'Kimia Dasar', members:60, active:true, lastPost:'1 jam lalu',
     posts:[{ author:'Saya Bingung', time:'1 jam lalu', text:'Stoikiometri masih bingung 😅 Ada yang mau buat sesi belajar bareng minggu ini?' }]
   },
-  { id:5, icon:'🔬🧬🦠', name:'Bio Squad', matkul:'Biologi', members:55, active:true, lastPost:'30 menit lalu',
+  { id:5, icon:'🧬🦠', name:'Bio Squad', matkul:'Biologi', members:55, active:true, lastPost:'30 menit lalu',
     posts:[{ author:'Ayu', time:'30 menit lalu', text:'Yang masih bingung transkripsi vs translasi, aku mau buat thread penjelasan besok!' }]
   },
   { id:6, icon:'📊', name:'Future Analyst', matkul:'Excel Dasar', members:45, active:false, lastPost:'3 jam lalu',
