@@ -148,11 +148,11 @@
       <div class="rc-body"><h4>Integral Parsial</h4><p>Kalkulus 2 • Andi • 1j 10m</p><a href="remindme.html">▶ Tonton</a></div>
     </div>
     <div class="rec-card">
-      <div class="rc-thumb" style="background:#FFF7ED;"><img src="assets/fisika1.png"></div>
+      <div class="rc-thumb" style="background:#fff2cc;"><img src="assets/fisika 1.png"></div>
       <div class="rc-body"><h4>Gerak Lurus Beraturan</h4><p>Fisika Dasar • Budi • 55m</p><a href="remindme.html">▶ Tonton</a></div>
     </div>
     <div class="rec-card">
-      <div class="rc-thumb" style="background:#FFF7ED;"><img src="assets/fisika2.png"></div>
+      <div class="rc-thumb" style="background:#fff2cc;"><img src="assets/fisika2.png"></div>
       <div class="rc-body"><h4>Hukum Newton</h4><p>Fisika Mekanika • Budi • 1j 05m</p><a href="remindme.html">▶ Tonton</a></div>
     </div>
     <div class="rec-card">
@@ -186,7 +186,7 @@
 const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
-  const first = user.name.split(' ')[0];
+  const first = user.nickname || user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
   document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
