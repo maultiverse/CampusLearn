@@ -5,7 +5,7 @@
   --orange: #F5843B;
   --orange-dark: #E66F22;
   --red: #E03A1D;
-  --cream: #FFF2CC;
+  --cream: #fff8e5;
   --gray: #6B7280;
   --dark: #111827;
   --white: #ffffff;
@@ -34,7 +34,7 @@ a { text-decoration: none; }
 .sidebar {
   position: fixed; left: 0; top: 0;
   width: var(--sidebar-w); height: 100vh;
-  background: #fff8e5;
+  background: #FFF2CC;
   padding: 30px 20px;
   color: var(--dark);
   display: flex; flex-direction: column;
