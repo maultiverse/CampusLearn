@@ -10,10 +10,10 @@
   position: sticky; top: 0;
   background: rgba(255,253,247,.92);
   backdrop-filter: blur(10px);
-  padding: 16px 0; border-bottom: 1px solid #F3F4F6; z-index: 99;
+  padding: 12px 0; border-bottom: 1px solid #F3F4F6; z-index: 99;
 }
 .navbar-inner { display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
+.nav-logo img { height: 52px; object-fit: contain; display: block; }
 .nav-links { display: flex; gap: 32px; }
 .nav-links a { color: var(--gray); font-size: .9rem; font-weight: 500; transition: color .2s; }
 .nav-links a:hover { color: var(--primary); }
@@ -85,12 +85,8 @@
 .plan-feats li:last-child { border-bottom: none; }
 .plan-feats li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
 
-@media (max-width: 980px) {
-  .pricing-grid { grid-template-columns: repeat(2,1fr); }
-}
-@media (max-width: 560px) {
-  .pricing-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 980px) { .pricing-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
 
 footer { background: var(--dark); color: white; padding: 36px 0; text-align: center; }
 footer p { opacity: .45; font-size: .82rem; }
@@ -101,7 +97,7 @@ footer p { opacity: .45; font-size: .82rem; }
 <nav class="navbar">
   <div class="container navbar-inner">
     <div class="nav-logo">
-      <img src="assets/logo.png" style="height:300px;object-fit:contain;">
+      <img src="assets/logo.png">
     </div>
     <div class="nav-links">
       <a href="#fitur">Fitur</a>
@@ -195,7 +191,6 @@ footer p { opacity: .45; font-size: .82rem; }
       <p>Fleksibel sesuai kebutuhanmu</p>
     </div>
     <div class="pricing-grid">
-
       <div class="pricing-card">
         <div class="plan-name">Basic</div>
         <div class="plan-price">Rp 90.000 <span>/bulan</span></div>
@@ -208,7 +203,6 @@ footer p { opacity: .45; font-size: .82rem; }
         </ul>
         <a href="signup.html" class="btn-outline" style="display:block;text-align:center;">Pilih Basic</a>
       </div>
-
       <div class="pricing-card popular">
         <div class="pop-badge">⭐ Terpopuler</div>
         <div class="plan-name">Premium</div>
@@ -222,7 +216,6 @@ footer p { opacity: .45; font-size: .82rem; }
         </ul>
         <a href="signup.html" class="btn-primary" style="display:block;text-align:center;">Pilih Premium</a>
       </div>
-
       <div class="pricing-card">
         <div class="plan-name">Institusi</div>
         <div class="plan-price">Rp 420.000 <span>/bulan</span></div>
@@ -235,7 +228,6 @@ footer p { opacity: .45; font-size: .82rem; }
         </ul>
         <a href="signup.html" class="btn-outline" style="display:block;text-align:center;">Pilih Institusi</a>
       </div>
-
       <div class="pricing-card">
         <div class="plan-name">Semester</div>
         <div class="plan-price">Rp 590.000 <span>/5 bulan</span></div>
@@ -243,12 +235,11 @@ footer p { opacity: .45; font-size: .82rem; }
         <ul class="plan-feats">
           <li>Semua fitur Premium</li>
           <li>Berlaku 4 bulan</li>
-          <li>hemat dibanding bulanan</li>
+          <li>Hemat dibanding bulanan</li>
           <li>Akses Gratis Ringkasin Metopen</li>
         </ul>
         <a href="signup.html" class="btn-outline" style="display:block;text-align:center;">Pilih Semester</a>
       </div>
-
     </div>
   </div>
 </section>
