@@ -46,8 +46,9 @@
 .rec-thumb {
   width: 70px; height: 48px; border-radius: 10px;
   background: #EEF2FF; display: flex; align-items: center;
-  justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+  justify-content: center; flex-shrink: 0; overflow: hidden;
 }
+.rec-thumb img { width: 100%; height: 100%; object-fit: contain; }
 .rec-info h3 { font-size: .85rem; font-weight: 600; }
 .rec-info p { font-size: .74rem; color: var(--gray); }
 .quick-link {
@@ -64,12 +65,12 @@
 <div class="sidebar">
   <div class="logo">
     <img src="assets/logo.png" style="width:140px;object-fit:contain;display:block;margin-bottom:4px;">
-    <span style="display:block;font-size:.72rem;opacity:.65;">Platform Belajar Mahasiswa</span>
+    <span style="display:block;font-size:.72rem;color:var(--gray);">Platform Belajar Mahasiswa</span>
   </div>
   <nav class="menu">
-    <a href="dashboard.html">Home</a>
-    <a href="clive.html" class="active"> C-Live</a>
-    <a href="ringkasin.html"> Ringkasin</a>
+    <a href="dashboard.html" class="active">Home</a>
+    <a href="clive.html"> C-Live</a>
+    <a href="ringkasin.html">Ringkasin</a>
     <a href="remindme.html">RemindMe</a>
     <a href="studygroup.html">Study Group</a>
     <a href="profile.html">Profil</a>
@@ -77,23 +78,20 @@
   <div class="sidebar-bottom">
     <div class="user-info">
       <div class="avatar" id="sb-avatar">R</div>
-      <div>
-        <div class="user-name" id="sb-name">-</div>
-        <div class="user-plan" id="sb-plan">-</div>
-      </div>
+      <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
     </div>
-    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+    <div class="logout-btn" onclick="logout()"> Keluar</div>
   </div>
 </div>
 
 <div class="main">
   <div class="banner">
     <div>
-      <h1 id="greet">Halo, Rakha 👋</h1>
+      <h1 id="greet">Halo </h1>
       <p>Siap belajar hari ini? Ada 2 sesi live menunggumu.</p>
     </div>
     <div style="text-align:right;">
-      <div class="plan-pill" id="banner-plan">⭐ Premium</div>
+      <div class="plan-pill" id="banner-plan">Premium</div>
       <div style="opacity:.65;font-size:.78rem;margin-top:8px;" id="banner-date">-</div>
     </div>
   </div>
@@ -144,8 +142,7 @@
         <a href="remindme.html">Semua →</a>
       </div>
       <div class="rec-row">
-        <div class="rec-thumb" style="background:#F0FDF4;">
-        <img src="assets/kalku.png" style="width:60px;height:60px;object-fit:contain;"></div>
+        <div class="rec-thumb"><img src="assets/kalku.png"></div>
         <div class="rec-info">
           <h3>Limit Fungsi – Kalkulus 1</h3>
           <p>Andi Mahardika • 1j 20m • 2 hari lalu</p>
@@ -153,8 +150,7 @@
         <a href="remindme.html" style="color:var(--primary);font-size:.8rem;font-weight:600;margin-left:auto;">▶</a>
       </div>
       <div class="rec-row">
-        <div class="rec-thumb" style="background:#F0FDF4;">
-        <img src="assets/fisika 1.png" style="width:60px;height:60px;object-fit:contain;"></div>
+        <div class="rec-thumb"><img src="assets/fisika1.png"></div>
         <div class="rec-info">
           <h3>Gerak Lurus – Fisika Dasar</h3>
           <p>Budi Santoso • 55m • 3 hari lalu</p>
@@ -166,15 +162,15 @@
     <div>
       <div class="sec-head"><h2>Akses Cepat</h2></div>
       <div class="card" style="margin-bottom:16px;">
-        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;">📄 Ringkasan Populer</h3>
+        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;">Ringkasan Populer</h3>
         <a href="ringkasin.html" class="quick-link">Kalkulus 2 <span style="color:var(--gray);font-size:.75rem;">12 topik</span></a>
         <a href="ringkasin.html" class="quick-link">Fisika Dasar <span style="color:var(--gray);font-size:.75rem;">9 topik</span></a>
         <a href="ringkasin.html" class="quick-link">Pemrograman Dasar <span style="color:var(--gray);font-size:.75rem;">8 topik</span></a>
       </div>
       <div class="card">
-        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;">Study Group Aktif</h3>
+        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;"> Study Group Aktif</h3>
         <a href="studygroup.html" class="quick-link">Kalkulus Menyenangkan <span style="color:#16a34a;font-size:.75rem;">● Live</span></a>
-        <a href="studygroup.html" class="quick-link">Fisika Einsten <span style="color:#16a34a;font-size:.75rem;">● Aktif</span></a>
+        <a href="studygroup.html" class="quick-link">Fisika Einstein <span style="color:#16a34a;font-size:.75rem;">● Aktif</span></a>
         <a href="studygroup.html" class="quick-link">Pecinta Data <span style="color:var(--gray);font-size:.75rem;">● Offline</span></a>
       </div>
     </div>
@@ -186,16 +182,15 @@ const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
   const first = user.name.split(' ')[0];
-  document.getElementById('greet').textContent = `Halo, ${first} 👋`;
+  document.getElementById('greet').textContent = `Halo, ${third}`;
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
-  const planLabel = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  const planLabel = user.plan === 'premium' ? 'Premium' : 'Basic';
   document.getElementById('sb-plan').textContent = planLabel;
   document.getElementById('banner-plan').textContent = planLabel;
 }
 document.getElementById('banner-date').textContent =
   new Date().toLocaleDateString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-
 function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 </script>
 </body>
