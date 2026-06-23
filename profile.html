@@ -86,6 +86,7 @@
     <div class="info-card">
       <h3>Informasi Akun</h3>
       <div class="info-row"><span class="lbl">Nama</span><span id="i-name">-</span></div>
+      <div class="info-row"><span class="lbl">Nama Panggilan</span><span id="i-nick">-</span></div>
       <div class="info-row"><span class="lbl">Email</span><span id="i-email">-</span></div>
       <div class="info-row"><span class="lbl">NIM</span><span id="i-nim">-</span></div>
       <div class="info-row"><span class="lbl">Program Studi</span><span id="i-prodi">-</span></div>
@@ -116,7 +117,7 @@
 const user = JSON.parse(localStorage.getItem('clUser') || 'null');
 if (!user) window.location.href = 'login.html';
 else {
-  const first = user.name.split(' ')[0];
+  const first = user.nickname || user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
   document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
@@ -127,6 +128,7 @@ else {
   if (user.plan === 'premium') { chip.textContent = 'Paket Premium'; }
   else { chip.textContent = 'Paket Basic'; chip.classList.add('basic'); }
   document.getElementById('i-name').textContent = user.name;
+  document.getElementById('i-nick').textContent = first;
   document.getElementById('i-email').textContent = user.email;
   document.getElementById('i-nim').textContent = user.nim || '-';
   document.getElementById('i-prodi').textContent = user.prodi || '-';
