@@ -13,15 +13,13 @@
   cursor: pointer; transition: transform .2s, box-shadow .2s;
 }
 .mk-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
-.mk-icon { font-size: 2rem; margin-bottom: 12px; }
+.mk-icon { margin-bottom: 12px; }
 .mk-icon img { width: 56px; height: 56px; object-fit: contain; }
 .mk-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
 .mk-card .tc { font-size: .78rem; color: var(--gray); margin-bottom: 14px; }
 .prog-bar { background: #F3F4F6; border-radius: 20px; height: 6px; }
 .prog-fill { background: var(--primary); border-radius: 20px; height: 6px; transition: width .4s; }
 .prog-lbl { font-size: .7rem; color: var(--gray); margin-top: 5px; }
-
-/* Modal */
 .overlay {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,.45); z-index: 300;
@@ -53,12 +51,12 @@
 <div class="sidebar">
   <div class="logo">
     <img src="assets/logo.png" style="width:140px;object-fit:contain;display:block;margin-bottom:4px;">
-    <span style="display:block;font-size:.72rem;opacity:.65;">Platform Belajar Mahasiswa</span>
+    <span style="display:block;font-size:.72rem;color:var(--gray);">Platform Belajar Mahasiswa</span>
   </div>
   <nav class="menu">
     <a href="dashboard.html">Home</a>
-    <a href="clive.html" class="active"> C-Live</a>
-    <a href="ringkasin.html"> Ringkasin</a>
+    <a href="clive.html">C-Live</a>
+    <a href="ringkasin.html" class="active">Ringkasin</a>
     <a href="remindme.html">RemindMe</a>
     <a href="studygroup.html">Study Group</a>
     <a href="profile.html">Profil</a>
@@ -68,22 +66,19 @@
       <div class="avatar" id="sb-avatar">R</div>
       <div><div class="user-name" id="sb-name">-</div><div class="user-plan" id="sb-plan">-</div></div>
     </div>
-    <div class="logout-btn" onclick="logout()">🚪 Keluar</div>
+    <div class="logout-btn" onclick="logout()"> Keluar</div>
   </div>
 </div>
 
 <div class="main">
   <div class="page-header">
-    <h1>📄RINGKASIN</h1>
+    <h1>📄 Ringkasin</h1>
     <p>Rangkuman materi terstruktur per mata kuliah</p>
   </div>
-
-  <input type="text" class="search-bar" placeholder="🔍 Cari mata kuliah atau topik..." oninput="filter(this.value)">
-
+  <input type="text" class="search-bar" placeholder="Cari mata kuliah atau topik..." oninput="filter(this.value)">
   <div class="matkul-grid" id="grid"></div>
 </div>
 
-<!-- Modal -->
 <div class="overlay" id="overlay" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-head">
@@ -104,7 +99,7 @@ else {
   const first = user.name.split(' ')[0];
   document.getElementById('sb-name').textContent = first;
   document.getElementById('sb-avatar').textContent = first[0].toUpperCase();
-  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? '⭐ Premium' : '🔵 Basic';
+  document.getElementById('sb-plan').textContent = user.plan === 'premium' ? 'Premium' : 'Basic';
 }
 function logout() { localStorage.removeItem('clUser'); window.location.href = 'login.html'; }
 
@@ -142,11 +137,9 @@ function filter(q) {
   render(f);
 }
 
-let current = [];
 function openModal(i) {
-  current = data;
-  const m = current[i] || data[i];
-  document.getElementById('m-icon').innerHTML = m.icon; // ganti textContent → innerHTML
+  const m = data[i];
+  document.getElementById('m-icon').innerHTML = m.icon;
   document.getElementById('m-title').textContent = m.name;
   const doneCount = Math.round(m.topics.length * m.prog / 100);
   document.getElementById('m-topics').innerHTML = m.topics.map((t,ti) => `
